@@ -6,9 +6,8 @@
  * Copyright (c) 2021.
  */
 
-class SceneManager {
-    constructor(game) {
-        Object.assign(this, {game});
+class Player {
+    constructor(game, xPos, yPos, direction) {
+        Object.assign(this, {game, xPos, yPos, direction});
     }
-
 }

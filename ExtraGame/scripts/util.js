@@ -2,6 +2,8 @@
  * Author: Espen Storfjell
  * Course: TCSS 491 A Wi 21 - Computational Worlds
  * School: University of Washington Tacoma
+ *
+ * Copyright (c) 2021.
  */
 
 // returns a random integer between 0 and n-1
@@ -31,8 +33,17 @@ window.requestAnimFrame = (function () {
         };
 })();
 
+function degToRad(degrees) {
+    return degrees * (Math.PI / 180);
+};
+
+function radToDeg(rad) {
+    return rad / (Math.PI / 180);
+};
+
 // add global parameters here
 
-//var params = {
-// 
-//};
+const PARAMS = {
+    VERTICAL_FOV: 80,
+    CAMERA_HEIGHT: 150
+};

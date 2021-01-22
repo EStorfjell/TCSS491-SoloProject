@@ -2,6 +2,8 @@
  * Author: Espen Storfjell
  * Course: TCSS 491 A Wi 21 - Computational Worlds
  * School: University of Washington Tacoma
+ *
+ * Copyright (c) 2021.
  */
 
 // This game shell was happily modified from Googler Seth Ladd's "Bad Aliens" game and his Google IO talk in 2011
@@ -23,7 +25,7 @@ class GameEngine {
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
         // Set origin in center of canvas
-        this.ctx.translate(this.surfaceWidth / 2, this.surfaceHeight / 2)
+        this.ctx.translate(this.surfaceWidth / 2, this.surfaceHeight / 2);
         this.startInput();
         this.timer = new Timer();
     };
