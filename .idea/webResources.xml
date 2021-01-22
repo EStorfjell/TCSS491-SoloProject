@@ -6,6 +6,7 @@
         <entryData>
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/Animation/sprites" />
+            <path value="file://$PROJECT_DIR$/Animation/scripts" />
           </resourceRoots>
         </entryData>
       </entry>
