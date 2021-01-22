@@ -7,8 +7,9 @@ ASSET_MANAGER.queueDownload("./sprites/guard.png")
 ASSET_MANAGER.downloadAll(function () {
     var canvas = document.getElementById('gameWorld');
     var ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
 
-    var guard = new Guard(GameEngine);
+    var guard = new Guard(gameEngine);
 
     gameEngine.init(ctx);
 
