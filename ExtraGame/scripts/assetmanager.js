@@ -1,3 +1,9 @@
+/*
+ * Author: Espen Storfjell
+ * Course: TCSS 491 A Wi 21 - Computational Worlds
+ * School: University of Washington Tacoma
+ */
+
 class AssetManager {
     constructor() {
         this.successCount = 0;
@@ -17,11 +23,11 @@ class AssetManager {
 
     downloadAll(callback) {
         if (this.downloadQueue.length === 0) setTimeout(callback, 10);
-        for (var i = 0; i < this.downloadQueue.length; i++) {
-            var img = new Image();
-            var that = this;
+        for (let i = 0; i < this.downloadQueue.length; i++) {
+            let img = new Image();
+            let that = this;
 
-            var path = this.downloadQueue[i];
+            let path = this.downloadQueue[i];
             console.log(path);
 
             img.addEventListener("load", function () {
@@ -44,5 +50,4 @@ class AssetManager {
     getAsset(path) {
         return this.cache[path];
     };
-};
-
+}

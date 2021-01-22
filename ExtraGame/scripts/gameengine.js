@@ -1,3 +1,9 @@
+/*
+ * Author: Espen Storfjell
+ * Course: TCSS 491 A Wi 21 - Computational Worlds
+ * School: University of Washington Tacoma
+ */
+
 // This game shell was happily modified from Googler Seth Ladd's "Bad Aliens" game and his Google IO talk in 2011
 
 class GameEngine {
@@ -16,12 +22,14 @@ class GameEngine {
         this.ctx = ctx;
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
+        // Set origin in center of canvas
+        this.ctx.translate(this.surfaceWidth / 2, this.surfaceHeight / 2)
         this.startInput();
         this.timer = new Timer();
     };
 
     start() {
-        var that = this;
+        let that = this;
         (function gameLoop() {
             that.loop();
             requestAnimFrame(gameLoop, that.ctx.canvas);
@@ -29,14 +37,14 @@ class GameEngine {
     };
 
     startInput() {
-        var that = this;
+        let that = this;
 
-        var getXandY = function (e) {
-            var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-            var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+        let getXandY = function (e) {
+            let x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+            let y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
 
             return {x: x, y: y};
-        }
+        };
 
         this.ctx.canvas.addEventListener("mousemove", function (e) {
             //console.log(getXandY(e));
@@ -67,24 +75,25 @@ class GameEngine {
     };
 
     draw() {
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        for (var i = 0; i < this.entities.length; i++) {
+        this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
+        for (let i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(this.ctx);
         }
     };
 
     update() {
-        var entitiesCount = this.entities.length;
+        let i;
+        let entitiesCount = this.entities.length;
 
-        for (var i = 0; i < entitiesCount; i++) {
-            var entity = this.entities[i];
+        for (i = 0; i < entitiesCount; i++) {
+            let entity = this.entities[i];
 
             if (!entity.removeFromWorld) {
                 entity.update();
             }
         }
 
-        for (var i = this.entities.length - 1; i >= 0; --i) {
+        for (i = this.entities.length - 1; i >= 0; --i) {
             if (this.entities[i].removeFromWorld) {
                 this.entities.splice(i, 1);
             }
@@ -96,4 +105,4 @@ class GameEngine {
         this.update();
         this.draw();
     };
-};
+}
