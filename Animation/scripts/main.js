@@ -1,8 +1,8 @@
 var gameEngine = new GameEngine();
 
-var ASSET_MANAGER = new AssetManager();
+const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("sprites/guard.png")
+ASSET_MANAGER.queueDownload("./sprites/guard.png")
 
 ASSET_MANAGER.downloadAll(function () {
     var canvas = document.getElementById('gameWorld');
@@ -11,6 +11,8 @@ ASSET_MANAGER.downloadAll(function () {
     var guard = new Guard(GameEngine);
 
     gameEngine.init(ctx);
+
+    gameEngine.addEntity(guard);
 
     gameEngine.start();
 });
