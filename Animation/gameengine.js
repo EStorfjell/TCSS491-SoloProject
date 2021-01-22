@@ -35,7 +35,7 @@ class GameEngine {
             var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
             var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
 
-            return { x: x, y: y };
+            return {x: x, y: y};
         }
 
         this.ctx.canvas.addEventListener("mousemove", function (e) {
