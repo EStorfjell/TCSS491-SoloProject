@@ -30,36 +30,37 @@ class Player {
             }
         }
 
-        let walkOrth = this.walkSpeed * this.game.clockTick;
-        let walkDiag = walkOrth / Math.SQRT2;
+        let walkLen = this.walkSpeed * this.game.clockTick;
         let delX = 0;
         let delY = 0;
-        let sine = Math.sin(this.direction);
-        let cosine = Math.cos(this.direction);
         if (this.game.up && !this.game.down) {
             if (this.game.right && !this.game.left) {
-                // TODO: Move forward-right
+                delY = -(walkLen * Math.cos(this.direction + Math.PI / 4));
+                delX = walkLen * Math.sin(this.direction + Math.PI / 4);
             } else if (this.game.left && !this.game.right) {
-                // TODO: Move forward-left
+                delY = -(walkLen * Math.cos(this.direction - Math.PI / 4));
+                delX = walkLen * Math.sin(this.direction - Math.PI / 4);
             } else {
-                delY = -(walkOrth * cosine);
-                delX = walkOrth * sine;
+                delY = -(walkLen * Math.cos(this.direction));
+                delX = walkLen * Math.sin(this.direction);
             }
         } else if (this.game.down && !this.game.up) {
             if (this.game.right && !this.game.left) {
-                // TODO: Move backward-right
+                delY = walkLen * Math.cos(this.direction - Math.PI / 4);
+                delX = -(walkLen * Math.sin(this.direction - Math.PI / 4));
             } else if (this.game.left && !this.game.right) {
-                // TODO: Move backward-left
+                delY = walkLen * Math.cos(this.direction + Math.PI / 4);
+                delX = -(walkLen * Math.sin(this.direction + Math.PI / 4));
             } else {
-                delY = walkOrth * cosine;
-                delX = -(walkOrth * sine);
+                delY = walkLen * Math.cos(this.direction);
+                delX = -(walkLen * Math.sin(this.direction));
             }
         } else if (this.game.right && !this.game.left) {
-            delX = walkOrth * cosine;
-            delY = walkOrth * sine;
+            delX = walkLen * Math.cos(this.direction);
+            delY = walkLen * Math.sin(this.direction);
         } else if (this.game.left && !this.game.right) {
-            delX = -(walkOrth * cosine);
-            delY = -(walkOrth * sine);
+            delX = -(walkLen * Math.cos(this.direction));
+            delY = -(walkLen * Math.sin(this.direction));
         }
 
         // TODO: Implement collision
@@ -68,13 +69,15 @@ class Player {
     };
 
     draw(ctx) {
-        ctx.font = "12px sans-serif";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "top";
-        ctx.fillStyle = "white";
-        ctx.fillText("x: " + this.xPos.toFixed(3), -315, -235);
-        ctx.fillText("y: " + this.yPos.toFixed(3), -315, -220);
-        ctx.fillText("\u03B8: " + this.direction.toFixed(3), -315, -205);
+        if (PARAMS.DEBUG) {
+            ctx.font = "12px sans-serif";
+            ctx.textAlign = "left";
+            ctx.textBaseline = "top";
+            ctx.fillStyle = "white";
+            ctx.fillText("x: " + this.xPos.toFixed(3), -315, -235);
+            ctx.fillText("y: " + this.yPos.toFixed(3), -315, -220);
+            ctx.fillText("\u03B8: " + this.direction.toFixed(3), -315, -205);
+        }
     };
 
     setPostition(xPos, yPos, direction) {

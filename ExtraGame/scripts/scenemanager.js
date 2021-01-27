@@ -35,7 +35,7 @@ class Ground {
         this.x = -(this.game.surfaceWidth / 2);
         this.y = 0;
         this.width = this.game.surfaceWidth;
-        this.height = this.game.surfaceHeight
+        this.height = this.game.surfaceHeight;
     };
 
     update() {

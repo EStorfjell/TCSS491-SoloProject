@@ -25,6 +25,9 @@ class Skeleton {
         this.facing = 0 // 0 = east, 1 = north, 2 = west, 3 = south
 
         this.visible = false;
+        this.screenX = 0;
+        this.screenY = 0;
+        this.screenHeight = 0;
 
         this.animations = [];
         this.loadAnimations();
@@ -35,7 +38,10 @@ class Skeleton {
     };
 
     draw(ctx) {
-
+        if (this.visible) {
+            let scale = this.screenHeight / this.spriteHeight;
+            this.animations[this.action][this.facing].drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
+        }
     };
 
     loadAnimations() {

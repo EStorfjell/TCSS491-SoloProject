@@ -11,7 +11,6 @@
 class GameEngine {
     constructor() {
         this.entities = [];
-        this.showOutlines = false;
         this.ctx = null;
 
         this.click = null;
