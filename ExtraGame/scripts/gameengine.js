@@ -13,9 +13,19 @@ class GameEngine {
         this.entities = [];
         this.showOutlines = false;
         this.ctx = null;
+
         this.click = null;
         this.mouse = null;
         this.wheel = null;
+
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.down = false;
+
+        this.turnLeft = false;
+        this.turnRight = false;
+
         this.surfaceWidth = null;
         this.surfaceHeight = null;
     };
@@ -70,6 +80,52 @@ class GameEngine {
             that.rightclick = getXandY(e);
             e.preventDefault();
         }, false);
+
+        this.ctx.canvas.addEventListener("keydown", function (e) {
+            switch (e.code) {
+                case "KeyA":
+                    that.left = true;
+                    break;
+                case "KeyD":
+                    that.right = true;
+                    break;
+                case "KeyW":
+                    that.up = true;
+                    break;
+                case "KeyS":
+                    that.down = true;
+                    break;
+                case "ArrowLeft":
+                    that.turnLeft = true;
+                    break;
+                case "ArrowRight":
+                    that.turnRight = true;
+                    break;
+            }
+        }, false);
+
+        this.ctx.canvas.addEventListener("keyup", function (e) {
+            switch (e.code) {
+                case "KeyA":
+                    that.left = false;
+                    break;
+                case "KeyD":
+                    that.right = false;
+                    break;
+                case "KeyW":
+                    that.up = false;
+                    break;
+                case "KeyS":
+                    that.down = false;
+                    break;
+                case "ArrowLeft":
+                    that.turnLeft = false;
+                    break;
+                case "ArrowRight":
+                    that.turnRight = false;
+                    break;
+            }
+        }, false);
     };
 
     addEntity(entity) {
@@ -77,7 +133,7 @@ class GameEngine {
     };
 
     draw() {
-        this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
+        this.ctx.clearRect(-(this.surfaceWidth / 2), -(this.surfaceHeight / 2), this.surfaceWidth, this.surfaceHeight);
         for (let i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(this.ctx);
         }

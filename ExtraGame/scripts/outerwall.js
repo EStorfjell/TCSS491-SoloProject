@@ -9,5 +9,15 @@
 class OuterWall {
     constructor(game, xPos, yPos, xLength, yLength, height) {
         Object.assign(this, {game, xPos, yPos, xLength, yLength, height});
-    }
+        this.color1 = "dimgrey";
+        this.color2 = "grey";
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+
+    };
 }

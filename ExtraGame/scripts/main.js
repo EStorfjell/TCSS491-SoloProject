@@ -17,6 +17,7 @@ ASSET_MANAGER.downloadAll(function () {
     let ctx = canvas.getContext('2d');
     // Nice, crisp pixels
     ctx.imageSmoothingEnabled = false;
+    PARAMS.HORIZONTAL_FOV = PARAMS.VERTICAL_FOV * ctx.canvas.width / ctx.canvas.height;
 
     gameEngine.init(ctx);
 
