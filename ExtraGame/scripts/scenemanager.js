@@ -22,7 +22,11 @@ class SceneManager {
         let ground = new Ground(this.game, "green");
         this.game.addEntity(ground);
 
-        this.enemy = new Skeleton(this.game, 0, -5, Math.PI);
+        let wall = new OuterWall(this.game, -10, -10, 20, 20);
+        this.game.addEntity(wall);
+
+        let enemy = new Skeleton(this.game, 0, -5, Math.PI);
+        this.game.addEntity(enemy);
 
         this.player.setPostition(0, 5, 0);
         this.game.addEntity(this.player);

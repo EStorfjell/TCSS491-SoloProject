@@ -17,6 +17,7 @@ class Player {
     };
 
     update() {
+        // turning
         let rotateAmt = this.turnSpeed * this.game.clockTick;
         if (this.game.turnRight && !this.game.turnLeft) {
             this.direction += rotateAmt;
@@ -30,6 +31,7 @@ class Player {
             }
         }
 
+        // walking
         let walkLen = this.walkSpeed * this.game.clockTick;
         let delX = 0;
         let delY = 0;
@@ -64,6 +66,31 @@ class Player {
         }
 
         // TODO: Implement collision
+        let that = this;
+        this.game.entities.forEach(function (entity) {
+            if (entity instanceof OuterWall) {
+                let west = entity.xPos;
+                let east = entity.xPos + entity.xLength;
+                let north = entity.yPos;
+                let south = entity.yPos + entity.yLength;
+
+                if (that.xPos + delX <= west) {
+                    delX = 0;
+                    that.xPos = west;
+                } else if (that.xPos + delX >= east) {
+                    delX = 0;
+                    that.xPos = east;
+                }
+                if (that.yPos + delY <= north) {
+                    delY = 0;
+                    that.yPos = north;
+                } else if (that.yPos + delY >= south) {
+                    delY = 0;
+                    that.yPos = south;
+                }
+            }
+        });
+
         this.xPos += delX;
         this.yPos += delY;
     };
@@ -82,5 +109,5 @@ class Player {
 
     setPostition(xPos, yPos, direction) {
         Object.assign(this, {xPos, yPos, direction});
-    }
+    };
 }
