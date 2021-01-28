@@ -36,7 +36,6 @@ class Skeleton {
     update() {
         // TODO: Add Skeleton behavior and collision
 
-        // TODO: Implement rendering
         // Determine where the skeleton is relative to the player
         let headingFromPlayer;
         let xDiff = this.xPos - this.game.player.xPos;
@@ -65,17 +64,23 @@ class Skeleton {
         } else this.visible = headingFromPlayer > fovLow && headingFromPlayer < fovHigh;
 
         // Determine size and location of sprite
-        let viewCenterX;
         if (this.visible) {
             let distanceFromPlayer = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
-            let viewAngle = headingFromPlayer - this.game.player.direction;
-            let distA = distanceFromPlayer * Math.sin(viewAngle);
-            let distB = distanceFromPlayer * Math.cos(viewAngle);
+            // determine scale and y screen position
+            let distX = distanceFromPlayer * Math.tan(PARAMS.VERTICAL_FOV / 2);
+            let topScreenHeight = PARAMS.CANVAS_HEIGHT * (this.height - PARAMS.CAMERA_HEIGHT) / distX;
+            let bottomScreenHeight = PARAMS.CANVAS_HEIGHT * PARAMS.CAMERA_HEIGHT / distX;
+            this.screenHeight = topScreenHeight + bottomScreenHeight;
+            this.screenY = -(topScreenHeight);
+            // determine x position on screen
+            let horizontalViewAngle = headingFromPlayer - this.game.player.direction;
+            let distA = distanceFromPlayer * Math.sin(horizontalViewAngle);
+            let distB = distanceFromPlayer * Math.cos(horizontalViewAngle);
             let distD = distB * Math.tan(PARAMS.HORIZONTAL_FOV / 2);
-            viewCenterX = PARAMS.CANVAS_WIDTH * distA / distD;
+            let viewCenterX = PARAMS.CANVAS_WIDTH * distA / distD;
+            let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
+            this.screenX = viewCenterX - xOffset;
         }
-        let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
-        this.screenX = viewCenterX - xOffset;
     };
 
     draw(ctx) {
