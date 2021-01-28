@@ -25,6 +25,7 @@ class SceneManager {
         let wall = new OuterWall(this.game, -10, -10, 20, 20);
         this.game.addEntity(wall);
 
+        // TODO: Change way sprite-based entities are stored so that closest sprites draw first
         let enemy = new Skeleton(this.game, 0, -5, Math.PI);
         this.game.addEntity(enemy);
 

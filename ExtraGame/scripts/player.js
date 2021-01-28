@@ -8,12 +8,12 @@
 
 class Player {
     constructor(game, xPos, yPos, direction) {
-        Object.assign(this, {game, xPos, yPos, direction: direction});
+        Object.assign(this, {game, xPos, yPos, direction});
         this.game.player = this;
 
         this.width = 0.5; // 50 cm diameter
         this.walkSpeed = 2.25; // 2.25 m/s
-        this.turnSpeed = Math.PI; // can turn pi rads in 1 second
+        this.turnSpeed = Math.PI / 2; // can turn pi rads in 1 second
     };
 
     update() {

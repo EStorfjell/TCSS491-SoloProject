@@ -10,7 +10,7 @@ let gameEngine = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./sprites/skeleton.png")
+ASSET_MANAGER.queueDownload("sprites/skeleton.png");
 
 ASSET_MANAGER.downloadAll(function () {
     let canvas = document.getElementById('gameWorld');
@@ -18,6 +18,7 @@ ASSET_MANAGER.downloadAll(function () {
     // Nice, crisp pixels
     ctx.imageSmoothingEnabled = false;
     PARAMS.HORIZONTAL_FOV = PARAMS.VERTICAL_FOV * ctx.canvas.width / ctx.canvas.height;
+    PARAMS.CANVAS_WIDTH = canvas.width;
 
     gameEngine.init(ctx);
 
