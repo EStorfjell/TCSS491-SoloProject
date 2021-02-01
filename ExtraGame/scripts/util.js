@@ -44,8 +44,8 @@ function radToDeg(rad) {
 // add global parameters here
 
 const PARAMS = {
-    VERTICAL_FOV: degToRad(80),
-    CAMERA_HEIGHT: 1.5,
+    VERTICAL_FOV: degToRad(70),
+    CAMERA_HEIGHT: 1.3,
     DEBUG: true,
     PRECISION: 0.001
 };

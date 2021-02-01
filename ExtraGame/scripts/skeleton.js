@@ -10,10 +10,10 @@ class Skeleton {
     constructor(game, xPos, yPos, direction) {
         Object.assign(this, {game, xPos, yPos, direction});
 
-        this.width = 0.5; // 50 cm diameter
-        this.height = 2; // 200 cm tall
-
+        this.width = 0.5; // diameter in meters
+        this.height = 2; // height in meters
         this.walkSpeed = 2; // 2 m/s
+        this.health = 10;
 
         // sprite sheet
         this.spritesheet = ASSET_MANAGER.getAsset("sprites/skeleton.png");
@@ -36,6 +36,7 @@ class Skeleton {
     update() {
         // TODO: Add Skeleton behavior and collision
 
+        // TODO: Implement rotation
         // Determine where the skeleton is relative to the player
         let headingFromPlayer;
         let xDiff = this.xPos - this.game.player.xPos;
@@ -63,20 +64,34 @@ class Skeleton {
             this.visible = headingFromPlayer > fovLow || headingFromPlayer < fovHigh - 2 * Math.PI;
         } else this.visible = headingFromPlayer > fovLow && headingFromPlayer < fovHigh;
 
-        // Determine size and location of sprite
+        // Determine size, orientation and location of sprite
         if (this.visible) {
+            // TODO: Calculate which orientation the sprite should display
+            let headingToPlayer = headingFromPlayer + 2 * Math.PI;
+            if (headingToPlayer < 0) headingToPlayer += 2 * Math.PI;
+            else if (headingToPlayer < 0) headingToPlayer += 2 * Math.PI;
+
             let distanceFromPlayer = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+
+            // Calculate distances for rendering
+            // delta from player.direction
+            let horizontalViewAngle = headingFromPlayer - this.game.player.direction;
+            // left-right component of distance from player
+            let distA = distanceFromPlayer * Math.sin(horizontalViewAngle);
+            // forward-back component of distance form player
+            let distB = distanceFromPlayer * Math.cos(horizontalViewAngle);
+            // projecting left-right edges of screen to distB away, this is 1/2 width of the screen
+            let distD = distB * Math.tan(PARAMS.HORIZONTAL_FOV / 2);
+            // same as above, but vertical
+            let distX = distB * Math.tan(PARAMS.VERTICAL_FOV / 2);
+
             // determine scale and y screen position
-            let distX = distanceFromPlayer * Math.tan(PARAMS.VERTICAL_FOV / 2);
             let topScreenHeight = PARAMS.CANVAS_HEIGHT * (this.height - PARAMS.CAMERA_HEIGHT) / distX;
             let bottomScreenHeight = PARAMS.CANVAS_HEIGHT * PARAMS.CAMERA_HEIGHT / distX;
             this.screenHeight = topScreenHeight + bottomScreenHeight;
             this.screenY = -(topScreenHeight);
+
             // determine x position on screen
-            let horizontalViewAngle = headingFromPlayer - this.game.player.direction;
-            let distA = distanceFromPlayer * Math.sin(horizontalViewAngle);
-            let distB = distanceFromPlayer * Math.cos(horizontalViewAngle);
-            let distD = distB * Math.tan(PARAMS.HORIZONTAL_FOV / 2);
             let viewCenterX = PARAMS.CANVAS_WIDTH * distA / distD;
             let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
             this.screenX = viewCenterX - xOffset;

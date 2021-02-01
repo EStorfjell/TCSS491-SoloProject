@@ -11,9 +11,9 @@ class Player {
         Object.assign(this, {game, xPos, yPos, direction});
         this.game.player = this;
 
-        this.width = 0.5; // 50 cm diameter
-        this.walkSpeed = 2.25; // 2.25 m/s
-        this.turnSpeed = Math.PI / 2; // can turn pi rads in 1 second
+        this.width = 0.5; // diameter in meters
+        this.walkSpeed = 3.5; // speed in m/s
+        this.turnSpeed = Math.PI / 2; // rads turned in 1 second
     };
 
     update() {
@@ -31,6 +31,7 @@ class Player {
             }
         }
 
+        // TODO: Change to velocity systemw
         // walking
         let walkLen = this.walkSpeed * this.game.clockTick;
         let delX = 0;
