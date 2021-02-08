@@ -136,6 +136,8 @@ class GameEngine {
         for (let i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(this.ctx);
         }
+
+        this.world.draw(this.ctx);
     };
 
     update() {
@@ -149,6 +151,8 @@ class GameEngine {
                 entity.update();
             }
         }
+
+        this.world.update();
 
         for (i = this.entities.length - 1; i >= 0; --i) {
             if (this.entities[i].removeFromWorld) {

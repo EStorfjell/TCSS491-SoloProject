@@ -32,23 +32,12 @@ class SceneManager {
         this.player.setPostition(0, 5, 0);
         this.game.addEntity(this.player);
     };
-}
-
-class Ground {
-    constructor(game, color) {
-        Object.assign(this, {game, color});
-        this.x = -(this.game.surfaceWidth / 2);
-        this.y = 0;
-        this.width = this.game.surfaceWidth;
-        this.height = this.game.surfaceHeight;
-    };
 
     update() {
-
+        PARAMS.DEBUG = document.getElementById("debug").checked;
     };
 
     draw(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    };
+
+    }
 }

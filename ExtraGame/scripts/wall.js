@@ -7,6 +7,7 @@
  */
 
 class Wall {
+    // TODO: Implement collision to replace wall collision in player.js
     constructor(game, xStart, yStart, xEnd, yEnd, height, color) {
         Object.assign(this, {game, xStart, yStart, xEnd, yEnd, height, color});
         this.corners = []; // Bottom-start, top-start, top-end, bottom-end

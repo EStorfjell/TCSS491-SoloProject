@@ -7,6 +7,7 @@
  */
 
 class Skeleton {
+    // TODO: Turn this into generic entity shell
     constructor(game, xPos, yPos, direction) {
         Object.assign(this, {game, xPos, yPos, direction});
 
@@ -62,14 +63,17 @@ class Skeleton {
             this.visible = headingFromPlayer > fovLow + 2 * Math.PI || headingFromPlayer < fovHigh;
         } else if (fovHigh > 2 * Math.PI) {
             this.visible = headingFromPlayer > fovLow || headingFromPlayer < fovHigh - 2 * Math.PI;
-        } else this.visible = headingFromPlayer > fovLow && headingFromPlayer < fovHigh;
+        } else {
+            this.visible = headingFromPlayer > fovLow && headingFromPlayer < fovHigh;
+        }
 
         // Determine size, orientation and location of sprite
         if (this.visible) {
             // TODO: Calculate which orientation the sprite should display
             let headingToPlayer = headingFromPlayer + 2 * Math.PI;
-            if (headingToPlayer < 0) headingToPlayer += 2 * Math.PI;
-            else if (headingToPlayer < 0) headingToPlayer += 2 * Math.PI;
+            if (headingToPlayer < 0) {
+                headingToPlayer += 2 * Math.PI;
+            } else if (headingToPlayer < 0) headingToPlayer += 2 * Math.PI;
 
             let distanceFromPlayer = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 
@@ -83,6 +87,12 @@ class Skeleton {
             // projecting left-right edges of screen to distB away, this is 1/2 width of the screen
             let distD = distB * Math.tan(PARAMS.HORIZONTAL_FOV / 2);
             // same as above, but vertical
+            /*
+             Using distB here instead of distanceFromPlayer corrects for fisheye distortion, but provides different
+             distortion where things closer to the edges seem closer. This "inverse fisheye" appears to be quite common
+             in many video games. Unsure which one is more accurate to real cameras, but this one makes drawing
+             polys easier.
+             */
             let distX = distB * Math.tan(PARAMS.VERTICAL_FOV / 2);
 
             // determine scale and y screen position
