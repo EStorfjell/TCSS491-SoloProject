@@ -13,17 +13,17 @@ class GameEngine {
         this.entities = [];
         this.ctx = null;
 
-        this.click = null;
-        this.mouse = null;
+        this.mouseInCanvas = false;
+        this.mouseDown = false;
+        this.mouse = {x: 0, y: 0};
+        this.leftClick = {x: 0, y: 0};
+        this.rightClick = {x: 0, y: 0};
         this.wheel = null;
 
         this.left = false;
         this.right = false;
         this.up = false;
         this.down = false;
-
-        this.turnLeft = false;
-        this.turnRight = false;
 
         this.surfaceWidth = null;
         this.surfaceHeight = null;
@@ -53,75 +53,83 @@ class GameEngine {
         let getXandY = function (e) {
             let x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
             let y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
-
             return {x: x, y: y};
         };
 
+        this.ctx.canvas.addEventListener("mouseenter", function (e) {
+            that.mouseInCanvas = true;
+        }, false);
+
+        this.ctx.canvas.addEventListener("mouseleave", function (e) {
+            that.mouseInCanvas = false;
+            document.body.style.cursor = "default";
+        }, false);
+
         this.ctx.canvas.addEventListener("mousemove", function (e) {
-            //console.log(getXandY(e));
             that.mouse = getXandY(e);
         }, false);
 
-        this.ctx.canvas.addEventListener("click", function (e) {
-            //console.log(getXandY(e));
-            that.click = getXandY(e);
+        this.ctx.canvas.addEventListener("mousedown", function (e) {
+            that.mouseDown = true;
+        }, false);
+
+        this.ctx.canvas.addEventListener("mouseup", function (e) {
+            that.mouseDown = false;
         }, false);
 
         this.ctx.canvas.addEventListener("wheel", function (e) {
-            //console.log(getXandY(e));
             that.wheel = e;
-            //       console.log(e.wheelDelta);
             e.preventDefault();
         }, false);
 
+        this.ctx.canvas.addEventListener("click", function (e) {
+            // console.log(getXandY(e));
+            that.leftClick = getXandY(e);
+        }, false);
+
         this.ctx.canvas.addEventListener("contextmenu", function (e) {
-            //console.log(getXandY(e));
             that.rightclick = getXandY(e);
             e.preventDefault();
         }, false);
 
         this.ctx.canvas.addEventListener("keydown", function (e) {
             switch (e.code) {
+                case "ArrowLeft":
                 case "KeyA":
                     that.left = true;
                     break;
+                case "ArrowRight":
                 case "KeyD":
                     that.right = true;
                     break;
+                case "ArrowUp":
                 case "KeyW":
                     that.up = true;
                     break;
+                case "ArrowDown":
                 case "KeyS":
                     that.down = true;
-                    break;
-                case "ArrowLeft":
-                    that.turnLeft = true;
-                    break;
-                case "ArrowRight":
-                    that.turnRight = true;
                     break;
             }
         }, false);
 
         this.ctx.canvas.addEventListener("keyup", function (e) {
             switch (e.code) {
+                case "ArrowLeft":
                 case "KeyA":
                     that.left = false;
                     break;
+                case "ArrowRight":
                 case "KeyD":
                     that.right = false;
                     break;
+                case "ArrowUp":
                 case "KeyW":
                     that.up = false;
                     break;
+                case "ArrowDown":
                 case "KeyS":
                     that.down = false;
-                    break;
-                case "ArrowLeft":
-                    that.turnLeft = false;
-                    break;
-                case "ArrowRight":
-                    that.turnRight = false;
                     break;
             }
         }, false);
