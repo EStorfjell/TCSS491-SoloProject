@@ -13,18 +13,18 @@ class Player {
 
         this.width = 0.5; // diameter in meters
         this.walkSpeed = 3.5; // speed in m/s
-        this.turnSpeed = Math.PI / 2; // rads turned in 1 second
+        this.turnSpeed = Math.PI / 3; // rads turned in 1 second
     };
 
     update() {
         // turning
         let rotateAmt = this.turnSpeed * this.game.clockTick;
-        if (this.game.turnRight && !this.game.turnLeft) {
+        if (this.game.right && !this.game.left) {
             this.direction += rotateAmt;
             while (this.direction >= 2 * Math.PI) {
                 this.direction -= 2 * Math.PI;
             }
-        } else if (this.game.turnLeft && !this.game.turnRight) {
+        } else if (this.game.left && !this.game.right) {
             this.direction -= rotateAmt;
             while (this.direction < 0) {
                 this.direction += 2 * Math.PI;
@@ -37,33 +37,11 @@ class Player {
         let delX = 0;
         let delY = 0;
         if (this.game.up && !this.game.down) {
-            if (this.game.right && !this.game.left) {
-                delY = -(walkLen * Math.cos(this.direction + Math.PI / 4));
-                delX = walkLen * Math.sin(this.direction + Math.PI / 4);
-            } else if (this.game.left && !this.game.right) {
-                delY = -(walkLen * Math.cos(this.direction - Math.PI / 4));
-                delX = walkLen * Math.sin(this.direction - Math.PI / 4);
-            } else {
-                delY = -(walkLen * Math.cos(this.direction));
-                delX = walkLen * Math.sin(this.direction);
-            }
+            delY = -(walkLen * Math.cos(this.direction));
+            delX = walkLen * Math.sin(this.direction);
         } else if (this.game.down && !this.game.up) {
-            if (this.game.right && !this.game.left) {
-                delY = walkLen * Math.cos(this.direction - Math.PI / 4);
-                delX = -(walkLen * Math.sin(this.direction - Math.PI / 4));
-            } else if (this.game.left && !this.game.right) {
-                delY = walkLen * Math.cos(this.direction + Math.PI / 4);
-                delX = -(walkLen * Math.sin(this.direction + Math.PI / 4));
-            } else {
-                delY = walkLen * Math.cos(this.direction);
-                delX = -(walkLen * Math.sin(this.direction));
-            }
-        } else if (this.game.right && !this.game.left) {
-            delX = walkLen * Math.cos(this.direction);
-            delY = walkLen * Math.sin(this.direction);
-        } else if (this.game.left && !this.game.right) {
-            delX = -(walkLen * Math.cos(this.direction));
-            delY = -(walkLen * Math.sin(this.direction));
+            delY = walkLen * Math.cos(this.direction);
+            delX = -(walkLen * Math.sin(this.direction));
         }
 
         // TODO: Implement collision
@@ -97,15 +75,7 @@ class Player {
     };
 
     draw(ctx) {
-        if (PARAMS.DEBUG) {
-            ctx.font = "12px sans-serif";
-            ctx.textAlign = "left";
-            ctx.textBaseline = "top";
-            ctx.fillStyle = "white";
-            ctx.fillText("x: " + this.xPos.toFixed(3), -315, -235);
-            ctx.fillText("y: " + this.yPos.toFixed(3), -315, -220);
-            ctx.fillText("\u03B8: " + this.direction.toFixed(3), -315, -205);
-        }
+
     };
 
     setPostition(xPos, yPos, direction) {
