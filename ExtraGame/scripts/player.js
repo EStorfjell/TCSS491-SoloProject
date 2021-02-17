@@ -81,4 +81,5 @@ class Player {
     setPostition(xPos, yPos, direction) {
         Object.assign(this, {xPos, yPos, direction});
     };
+
 }

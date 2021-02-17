@@ -18,12 +18,14 @@
     <script type="text/javascript" src="scripts/util.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
     <script type="text/javascript" src="scripts/animator.js"></script>
-    <script type="text/javascript" src="scripts/skeleton.js"></script>
-    <script type="text/javascript" src="scripts/scenemanager.js"></script>
-    <script type="text/javascript" src="scripts/outerwall.js"></script>
     <script type="text/javascript" src="scripts/player.js"></script>
-    <script type="text/javascript" src="scripts/wall.js"></script>
-    <script type="text/javascript" src="scripts/ground.js"></script>
+    <script type="text/javascript" src="scripts/entities/spriteentity.js"></script>
+    <script type="text/javascript" src="scripts/entities/skeleton.js"></script>
+    <script type="text/javascript" src="scripts/entities/tree.js"></script>
+    <script type="text/javascript" src="scripts/entities/outerwall.js"></script>
+    <script type="text/javascript" src="scripts/entities/wall.js"></script>
+    <script type="text/javascript" src="scripts/entities/ground.js"></script>
+    <script type="text/javascript" src="scripts/scenemanager.js"></script>
 </head>
 <body>
 <div>
@@ -32,7 +34,13 @@
     <p><input type="checkbox" id="debug" checked> Debug</p>
 </div>
 <div>
-    <p>WASD/arrows to move.</p>
+    Controls:
+    <ul>
+        <li>W/Up - Move forward</li>
+        <li>S/Down - Move backward</li>
+        <li>A/Left - Turn left</li>
+        <li>D/Right - Turn right</li>
+    </ul>
 </div>
 </body>
 </html>

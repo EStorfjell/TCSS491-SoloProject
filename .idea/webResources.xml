@@ -9,6 +9,7 @@
             <path value="file://$PROJECT_DIR$/Animation/scripts" />
             <path value="file://$PROJECT_DIR$/ExtraGame/sprites" />
             <path value="file://$PROJECT_DIR$/ExtraGame/scripts" />
+            <path value="file://$PROJECT_DIR$/ExtraGame/scripts/entities" />
           </resourceRoots>
         </entryData>
       </entry>

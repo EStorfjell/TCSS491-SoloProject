@@ -23,14 +23,23 @@ class SceneManager {
         let ground = new Ground(this.game, "green");
         this.game.addEntity(ground);
 
-        let wall = new OuterWall(this.game, -10, -10, 20, 20);
+        let wall = new OuterWall(this.game, -20, -20, 40, 40);
         this.game.addEntity(wall);
 
         // TODO: Change way sprite-based entities are stored so that closest sprites draw first
-        let enemy = new Skeleton(this.game, 0, -5, Math.PI);
+        let tree = new Tree(this.game, -15, -15, 0);
+        this.game.addEntity(tree);
+        tree = new Tree(this.game, 15, -15, 0);
+        this.game.addEntity(tree);
+        tree = new Tree(this.game, -15, 15, 0);
+        this.game.addEntity(tree);
+        tree = new Tree(this.game, 15, 15, 0);
+        this.game.addEntity(tree);
+
+        let enemy = new Skeleton(this.game, 0, -10, Math.PI);
         this.game.addEntity(enemy);
 
-        this.player.setPostition(0, 5, 0);
+        this.player.setPostition(0, 10, 0);
         this.game.addEntity(this.player);
     };
 

@@ -6,37 +6,17 @@
  * Copyright (c) 2021.
  */
 
-class Skeleton {
-    // TODO: Turn this into generic entity shell
-    constructor(game, xPos, yPos, direction) {
-        Object.assign(this, {game, xPos, yPos, direction});
-
-        this.width = 0.5; // diameter in meters
-        this.height = 2; // height in meters
-        this.walkSpeed = 2; // 2 m/s
-        this.health = 10;
-
-        // sprite sheet
-        this.spritesheet = ASSET_MANAGER.getAsset("sprites/skeleton.png");
-        this.spriteWidth = 25;
-        this.spriteHeight = 46;
-
-        // character states
-        this.action = 0; // 0 = idle, 1 = walking
-        this.facing = 3; // 0 = east, 1 = north, 2 = west, 3 = south
+class SpriteEntity {
+    constructor(game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight) {
+        Object.assign(this, {game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight});
 
         this.visible = false;
         this.screenX = 0;
         this.screenY = 0;
-        this.screenHeight = 46;
-
-        this.animations = [];
-        this.loadAnimations();
+        this.screenHeight = this.spriteHeight;
     };
 
-    update() {
-        // TODO: Add Skeleton behavior and collision
-
+    renderCalc() {
         // TODO: Implement rotation
         // Determine where the skeleton is relative to the player
         let headingFromPlayer;
@@ -106,41 +86,5 @@ class Skeleton {
             let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
             this.screenX = viewCenterX - xOffset;
         }
-    };
-
-    draw(ctx) {
-        if (this.visible) {
-            let scale = this.screenHeight / this.spriteHeight;
-            this.animations[this.action][this.facing].drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
-        }
-    };
-
-    loadAnimations() {
-        for (let i = 0; i < 2; i++) { // two actions
-            this.animations.push([]);
-            for (i = 0; i < 4; i++) { // four directions
-                this.animations.push([]);
-            }
-        }
-
-        // idle
-        // east
-        this.animations[0][0] = new Animator(this.spritesheet, 13, 146, this.spriteWidth, this.spriteHeight, 1, 0.15, 23, false, true);
-        // north
-        this.animations[0][1] = new Animator(this.spritesheet, 11, 210, this.spriteWidth, this.spriteHeight, 1, 0.15, 23, false, true);
-        // west
-        this.animations[0][2] = new Animator(this.spritesheet, 10, 82, this.spriteWidth, this.spriteHeight, 1, 0.15, 23, false, true);
-        // south
-        this.animations[0][3] = new Animator(this.spritesheet, 11, 18, this.spriteWidth, this.spriteHeight, 1, 0.15, 23, false, true);
-
-        // walking
-        // east
-        this.animations[1][0] = new Animator(this.spritesheet, 13, 146, this.spriteWidth, this.spriteHeight, 4, 0.15, 23, false, true);
-        // north
-        this.animations[1][1] = new Animator(this.spritesheet, 11, 210, this.spriteWidth, this.spriteHeight, 4, 0.15, 23, false, true);
-        // west
-        this.animations[1][2] = new Animator(this.spritesheet, 10, 82, this.spriteWidth, this.spriteHeight, 4, 0.15, 23, false, true);
-        // south
-        this.animations[1][3] = new Animator(this.spritesheet, 11, 18, this.spriteWidth, this.spriteHeight, 4, 0.15, 23, false, true);
     };
 }
