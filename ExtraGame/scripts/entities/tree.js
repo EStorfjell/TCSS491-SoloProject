@@ -35,7 +35,7 @@ class Tree extends SpriteEntity {
     };
 
     draw(ctx) {
-        if (this.visible) {
+        if (this.isVisible) {
             let scale = this.screenHeight / Tree.spriteHeight;
             Tree.animator.drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
         }

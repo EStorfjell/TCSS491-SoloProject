@@ -13,6 +13,8 @@ class Wall {
         Object.assign(this, {game, xStart, yStart, xEnd, yEnd, height, color});
         this.corners = []; // Bottom-start, top-start, top-end, bottom-end
         this.initCorners();
+
+        this._isVisible = false;
     };
 
     update() {
@@ -22,8 +24,14 @@ class Wall {
 
         // Calculate positions of corners
         if (startVisible && endVisible) {
+            this._isVisible = true;
             // Both edges of the wall are in front of the player and wall can just be drawn corner to corner
-
+            let startEdge = this.renderEdge(this.xStart, this.yStart, this.corners[0], this.corners[1]);
+            this.corners[0] = startEdge.bottomScreenCorner;
+            this.corners[1] = startEdge.topScreenCorner;
+            let endEdge = this.renderEdge(this.xEnd, this.yEnd, this.corners[3], this.corners[2]);
+            this.corners[3] = endEdge.bottomScreenCorner;
+            this.corners[2] = endEdge.topScreenCorner;
         } else if (startVisible) {
             // "Start" edge can be drawn simply and line intersection required for rest
 
@@ -33,15 +41,20 @@ class Wall {
         } else {
             // Line intersections needed to be calculated to see if wall is visible
 
+            this._isVisible = false;
+
         }
     };
 
     draw(ctx) {
-        // Draw polygon
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        for (let i = 0; i < 4; i++) { // four corners
-            ctx.moveTo(this.corners[i]);
+        if (this._isVisible) {
+            // Draw polygon
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            for (let i = 0; i < 4; i++) { // four corners
+                ctx.moveTo(this.corners[i].screenX, this.corners[i].screenY);
+            }
+            ctx.fill();
         }
     };
 
@@ -49,6 +62,10 @@ class Wall {
         for (let i = 0; i < 4; i++) { // four corners
             this.corners.push({screenX: 0, screenY: 0});
         }
+    };
+
+    get isVisible() {
+        return this._isVisible;
     };
 
     checkEdgeVisible(xPos, yPos) {
@@ -83,5 +100,12 @@ class Wall {
         }
 
         return visible;
+    };
+
+    renderEdge(xPos, yPos, bottomCorner, topCorner) {
+        let bottomScreenCorner = {screenX: 0, screenY: 0};
+        let topScreenCorner = {screenX: 0, screenY: 0};
+
+        return {bottomScreenCorner, topScreenCorner};
     };
 }

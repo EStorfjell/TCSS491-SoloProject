@@ -40,6 +40,7 @@ class SceneManager {
 
         let enemy = new Skeleton(this.game, 0, -10, Math.PI);
         this.game.addEntity(enemy);
+        console.log(this.game.entities);
     };
 
     update() {

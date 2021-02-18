@@ -98,8 +98,4 @@ class SpriteEntity {
     get isVisible() {
         return this._isVisible;
     };
-
-    set isVisible(value) {
-        this._isVisible = value;
-    };
 }

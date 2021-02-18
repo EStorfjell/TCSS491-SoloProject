@@ -37,7 +37,8 @@ class Skeleton extends SpriteEntity {
     };
 
     draw(ctx) {
-        if (this.visible) {
+        if (this.isVisible) {
+            console.log();
             let scale = this.screenHeight / Skeleton.spriteHeight;
             Skeleton.animations[this.action][this.facing].drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
         }
