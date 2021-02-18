@@ -1,6 +1,7 @@
 /*
  * Author: Espen Storfjell
  * Course: TCSS 491 A Wi 21 - Computational Worlds
+ * Instructor: Chris Marriott
  * School: University of Washington Tacoma
  *
  * Copyright (c) 2021.
@@ -82,4 +83,7 @@ class Player {
         Object.assign(this, {xPos, yPos, direction});
     };
 
+    get renderDistance() {
+        return -1;
+    };
 }
