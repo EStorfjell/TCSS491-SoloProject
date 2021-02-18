@@ -1,7 +1,6 @@
 /*
  * Author: Espen Storfjell
  * Course: TCSS 491 A Wi 21 - Computational Worlds
- * Instructor: Chris Marriott
  * School: University of Washington Tacoma
  *
  * Copyright (c) 2021.
@@ -63,6 +62,7 @@ class GameEngine {
 
         this.ctx.canvas.addEventListener("mouseleave", function (e) {
             that.mouseInCanvas = false;
+            document.body.style.cursor = "default";
         }, false);
 
         this.ctx.canvas.addEventListener("mousemove", function (e) {
@@ -135,10 +135,17 @@ class GameEngine {
         }, false);
     };
 
-    loop() {
-        this.clockTick = this.timer.tick();
-        this.update();
-        this.draw();
+    addEntity(entity) {
+        this.entities.push(entity);
+    };
+
+    draw() {
+        this.ctx.clearRect(-(this.surfaceWidth / 2), -(this.surfaceHeight / 2), this.surfaceWidth, this.surfaceHeight);
+        for (let i = 0; i < this.entities.length; i++) {
+            this.entities[i].draw(this.ctx);
+        }
+
+        this.world.draw(this.ctx);
     };
 
     update() {
@@ -162,17 +169,9 @@ class GameEngine {
         }
     };
 
-    draw() {
-        // TODO: Take "renderDistance" into account in render order
-        this.ctx.clearRect(-(this.surfaceWidth / 2), -(this.surfaceHeight / 2), this.surfaceWidth, this.surfaceHeight);
-        for (let i = 0; i < this.entities.length; i++) {
-            this.entities[i].draw(this.ctx);
-        }
-
-        this.world.draw(this.ctx);
-    };
-
-    addEntity(entity) {
-        this.entities.push(entity);
+    loop() {
+        this.clockTick = this.timer.tick();
+        this.update();
+        this.draw();
     };
 }

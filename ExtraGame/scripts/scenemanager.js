@@ -1,7 +1,6 @@
 /*
  * Author: Espen Storfjell
  * Course: TCSS 491 A Wi 21 - Computational Worlds
- * Instructor: Chris Marriott
  * School: University of Washington Tacoma
  *
  * Copyright (c) 2021.
@@ -21,15 +20,13 @@ class SceneManager {
     loadLevelOne() {
         this.game.entities = [];
 
-        this.player.setPostition(0, 10, 0);
-        this.game.addEntity(this.player);
-
         let ground = new Ground(this.game, "green");
         this.game.addEntity(ground);
 
         let wall = new OuterWall(this.game, -20, -20, 40, 40);
         this.game.addEntity(wall);
 
+        // TODO: Change way sprite-based entities are stored so that closest sprites draw first
         let tree = new Tree(this.game, -15, -15, 0);
         this.game.addEntity(tree);
         tree = new Tree(this.game, 15, -15, 0);
@@ -41,6 +38,9 @@ class SceneManager {
 
         let enemy = new Skeleton(this.game, 0, -10, Math.PI);
         this.game.addEntity(enemy);
+
+        this.player.setPostition(0, 10, 0);
+        this.game.addEntity(this.player);
     };
 
     update() {
@@ -82,5 +82,5 @@ class SceneManager {
                 ctx.drawImage(this.keyboardImg, 269, 28, 11, 11, -303, 212, 11, 11);
             }
         }
-    };
+    }
 }

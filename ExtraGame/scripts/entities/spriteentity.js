@@ -1,7 +1,6 @@
 /*
  * Author: Espen Storfjell
  * Course: TCSS 491 A Wi 21 - Computational Worlds
- * Instructor: Chris Marriott
  * School: University of Washington Tacoma
  *
  * Copyright (c) 2021.
@@ -11,17 +10,15 @@ class SpriteEntity {
     constructor(game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight) {
         Object.assign(this, {game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight});
 
-        this._isVisible = false;
+        this.visible = false;
         this.screenX = 0;
         this.screenY = 0;
         this.screenHeight = this.spriteHeight;
-
-        this._renderDistance = 0;
     };
 
     renderCalc() {
         // TODO: Implement rotation
-        // Determine where the sprite is relative to the player
+        // Determine where the skeleton is relative to the player
         let headingFromPlayer;
         let xDiff = this.xPos - this.game.player.xPos;
         let yDiff = this.yPos - this.game.player.yPos;
@@ -38,20 +35,20 @@ class SpriteEntity {
             }
         }
 
-        // Determine if the player can see the sprite
+        // Determine if the player can see the skeleton
         // Assume horizontal fov < 180 degrees
         let fovLow = this.game.player.direction - Math.PI / 2;
         let fovHigh = this.game.player.direction + Math.PI / 2;
         if (fovLow < 0) {
-            this._isVisible = headingFromPlayer > fovLow + 2 * Math.PI || headingFromPlayer < fovHigh;
+            this.visible = headingFromPlayer > fovLow + 2 * Math.PI || headingFromPlayer < fovHigh;
         } else if (fovHigh > 2 * Math.PI) {
-            this._isVisible = headingFromPlayer > fovLow || headingFromPlayer < fovHigh - 2 * Math.PI;
+            this.visible = headingFromPlayer > fovLow || headingFromPlayer < fovHigh - 2 * Math.PI;
         } else {
-            this._isVisible = headingFromPlayer > fovLow && headingFromPlayer < fovHigh;
+            this.visible = headingFromPlayer > fovLow && headingFromPlayer < fovHigh;
         }
 
         // Determine size, orientation and location of sprite
-        if (this._isVisible) {
+        if (this.visible) {
             // TODO: Calculate which orientation the sprite should display
             let headingToPlayer = headingFromPlayer + 2 * Math.PI;
             if (headingToPlayer < 0) {
@@ -77,7 +74,6 @@ class SpriteEntity {
              polys easier.
              */
             let distX = distB * Math.tan(PARAMS.VERTICAL_FOV / 2);
-            this._renderDistance = distB;
 
             // determine scale and y screen position
             let topScreenHeight = PARAMS.CANVAS_HEIGHT * (this.height - PARAMS.CAMERA_HEIGHT) / distX;
@@ -90,17 +86,5 @@ class SpriteEntity {
             let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
             this.screenX = viewCenterX - xOffset;
         }
-    };
-
-    get renderDistance() {
-        return this._renderDistance;
-    };
-
-    get isVisible() {
-        return this._isVisible;
-    };
-
-    set isVisible(value) {
-        this._isVisible = value;
     };
 }
