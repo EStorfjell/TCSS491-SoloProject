@@ -8,7 +8,7 @@
 
 class Skeleton extends SpriteEntity {
     static width = 0.5; // diameter in meters
-    static height = 2; // height in meters
+    static height = 1.5; // height in meters
     static walkSpeed = 2; // 2 m/s
     static health = 10;
 
@@ -38,7 +38,6 @@ class Skeleton extends SpriteEntity {
 
     draw(ctx) {
         if (this.isVisible) {
-            console.log();
             let scale = this.screenHeight / Skeleton.spriteHeight;
             Skeleton.animations[this.action][this.facing].drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
         }

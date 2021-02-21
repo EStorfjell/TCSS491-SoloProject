@@ -36,15 +36,15 @@ class OuterWall {
 
         // north wall
         this.walls[0] = new Wall(this.game, this.xStart, this.yStart, this.xStart + this.xLength, this.yStart,
-            this.height, Wall.color1);
+            this.height, OuterWall.color1);
         // east wall
         this.walls[1] = new Wall(this.game, this.xStart + this.xLength, this.yStart, this.xStart + this.xLength,
-            this.yStart + this.yLength, this.height, Wall.color2);
+            this.yStart + this.yLength, this.height, OuterWall.color2);
         // south wall
         this.walls[2] = new Wall(this.game, this.xStart + this.xLength, this.yStart + this.yLength, this.xStart,
-            this.yStart + this.yLength, this.height, Wall.color1);
+            this.yStart + this.yLength, this.height, OuterWall.color1);
         // west wall
         this.walls[3] = new Wall(this.game, this.xStart, this.yStart + this.yLength, this.xStart, this.yStart,
-            this.height, Wall.color2);
+            this.height, OuterWall.color2);
     };
 }

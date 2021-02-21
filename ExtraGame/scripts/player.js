@@ -31,27 +31,26 @@ class Player {
             }
         }
 
-        // TODO: Change to velocity systemw
         // walking
         let walkLen = this.walkSpeed * this.game.clockTick;
         let delX = 0;
         let delY = 0;
         if (this.game.up && !this.game.down) {
-            delY = -(walkLen * Math.cos(this.direction));
-            delX = walkLen * Math.sin(this.direction);
+            delX = walkLen * Math.cos(this.direction);
+            delY = walkLen * Math.sin(this.direction);
         } else if (this.game.down && !this.game.up) {
-            delY = walkLen * Math.cos(this.direction);
-            delX = -(walkLen * Math.sin(this.direction));
+            delX = -(walkLen * Math.cos(this.direction));
+            delY = -(walkLen * Math.sin(this.direction));
         }
 
         // TODO: Implement collision
         let that = this;
         this.game.entities.forEach(function (entity) {
             if (entity instanceof OuterWall) {
-                let west = entity.xPos;
-                let east = entity.xPos + entity.xLength;
-                let north = entity.yPos;
-                let south = entity.yPos + entity.yLength;
+                let west = entity.xStart;
+                let east = entity.xStart + entity.xLength;
+                let north = entity.yStart;
+                let south = entity.yStart + entity.yLength;
 
                 if (that.xPos + delX <= west) {
                     delX = 0;

@@ -24,16 +24,16 @@ class SpriteEntity {
         let headingFromPlayer;
         let xDiff = this.xPos - this.game.player.xPos;
         let yDiff = this.yPos - this.game.player.yPos;
-        if (yDiff < 0) {
-            headingFromPlayer = -(Math.atan(xDiff / yDiff));
+        if (xDiff > 0) {
+            headingFromPlayer = Math.atan(yDiff / xDiff);
             if (headingFromPlayer < 0) headingFromPlayer += 2 * Math.PI;
-        } else if (yDiff > 0) {
-            headingFromPlayer = Math.PI - Math.atan(xDiff / yDiff);
+        } else if (xDiff < 0) {
+            headingFromPlayer = Math.PI + Math.atan(yDiff / xDiff);
         } else {
-            if (xDiff > 0) {
+            if (yDiff > 0) {
                 headingFromPlayer = Math.PI / 2;
             } else {
-                headingFromPlayer = -(Math.PI / 2);
+                headingFromPlayer = 3 * Math.PI / 2;
             }
         }
 
@@ -52,16 +52,21 @@ class SpriteEntity {
         // Determine size, orientation and location of sprite
         if (this._isVisible) {
             // TODO: Calculate which orientation the sprite should display
-            let headingToPlayer = headingFromPlayer + 2 * Math.PI;
+            let headingToPlayer = headingFromPlayer - 2 * Math.PI;
             if (headingToPlayer < 0) {
                 headingToPlayer += 2 * Math.PI;
-            } else if (headingToPlayer < 0) headingToPlayer += 2 * Math.PI;
+            }
 
             let distanceFromPlayer = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 
             // Calculate distances for rendering
             // delta from player.direction
-            let horizontalViewAngle = headingFromPlayer - this.game.player.direction;
+            let horizontalViewAngle;
+            if (headingFromPlayer < this.game.player.direction - Math.PI) {
+                horizontalViewAngle = headingFromPlayer + 2 * Math.PI - this.game.player.direction;
+            } else {
+                horizontalViewAngle = headingFromPlayer - this.game.player.direction;
+            }
             // left-right component of distance from player
             let distA = distanceFromPlayer * Math.sin(horizontalViewAngle);
             // forward-back component of distance form player
@@ -85,7 +90,7 @@ class SpriteEntity {
             this.screenY = -(topScreenHeight);
 
             // determine x position on screen
-            let viewCenterX = PARAMS.CANVAS_WIDTH * distA / distD;
+            let viewCenterX = (PARAMS.CANVAS_WIDTH / 2) * distA / distD;
             let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
             this.screenX = viewCenterX - xOffset;
         }

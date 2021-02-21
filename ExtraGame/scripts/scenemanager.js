@@ -20,27 +20,26 @@ class SceneManager {
     loadLevelOne() {
         this.game.entities = [];
 
-        this.player.setPostition(0, 10, 0);
+        this.player.setPostition(0, 10, 3 * Math.PI / 2);
         this.game.addEntity(this.player);
 
         let ground = new Ground(this.game, "green");
         this.game.addEntity(ground);
 
-        let wall = new OuterWall(this.game, -20, -20, 40, 40);
+        let wall = new OuterWall(this.game, -20, -20, 40, 40, 5);
         this.game.addEntity(wall);
 
-        let tree = new Tree(this.game, -15, -15, 0);
+        let tree = new Tree(this.game, -10, -10, 0);
         this.game.addEntity(tree);
-        tree = new Tree(this.game, 15, -15, 0);
+        tree = new Tree(this.game, 10, -10, 0);
         this.game.addEntity(tree);
-        tree = new Tree(this.game, -15, 15, 0);
+        tree = new Tree(this.game, -10, 10, 0);
         this.game.addEntity(tree);
-        tree = new Tree(this.game, 15, 15, 0);
+        tree = new Tree(this.game, 10, 10, 0);
         this.game.addEntity(tree);
 
-        let enemy = new Skeleton(this.game, 0, -10, Math.PI);
+        let enemy = new Skeleton(this.game, 0, -10, Math.PI / 2);
         this.game.addEntity(enemy);
-        console.log(this.game.entities);
     };
 
     update() {
