@@ -33,8 +33,9 @@ class GameEngine {
         this.ctx = ctx;
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
-        // Set origin in center of canvas
-        this.ctx.translate(this.surfaceWidth / 2, this.surfaceHeight / 2);
+
+        this.ctx.translate(this.surfaceWidth / 2, PARAMS.GAME_CENTER);
+
         this.startInput();
         this.timer = new Timer();
     };
@@ -66,6 +67,8 @@ class GameEngine {
 
         this.ctx.canvas.addEventListener("mousemove", function (e) {
             that.mouse = getXandY(e);
+            that.mouse.x -= PARAMS.CANVAS_WIDTH / 2;
+            that.mouse.y -= PARAMS.GAME_CENTER;
         }, false);
 
         this.ctx.canvas.addEventListener("mousedown", function (e) {
@@ -82,12 +85,15 @@ class GameEngine {
         }, false);
 
         this.ctx.canvas.addEventListener("click", function (e) {
-            // console.log(getXandY(e));
             that.leftClick = getXandY(e);
+            that.leftClick.x -= PARAMS.CANVAS_WIDTH / 2;
+            that.leftClick.y -= PARAMS.GAME_CENTER;
         }, false);
 
         this.ctx.canvas.addEventListener("contextmenu", function (e) {
-            that.rightclick = getXandY(e);
+            that.rightClick = getXandY(e);
+            that.rightClick.x -= PARAMS.CANVAS_WIDTH / 2;
+            that.rightClick.y -= PARAMS.GAME_CENTER;
             e.preventDefault();
         }, false);
 
@@ -163,7 +169,8 @@ class GameEngine {
 
     draw() {
         // TODO: Take "renderDistance" into account in render order
-        this.ctx.clearRect(-(this.surfaceWidth / 2), -(this.surfaceHeight / 2), this.surfaceWidth, this.surfaceHeight);
+        this.ctx.clearRect(-(this.surfaceWidth / 2), PARAMS.CANVAS_TOP,
+            this.surfaceWidth, this.surfaceHeight);
         for (let i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(this.ctx);
         }

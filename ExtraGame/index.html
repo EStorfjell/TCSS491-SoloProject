@@ -12,6 +12,8 @@
     <meta charset="utf-8">
     <title>Espen's Game</title>
 
+    <link href="style.css" type="text/css" rel="stylesheet">
+
     <script type="text/javascript" src="scripts/assetmanager.js"></script>
     <script type="text/javascript" src="scripts/timer.js"></script>
     <script type="text/javascript" src="scripts/gameengine.js"></script>
@@ -22,27 +24,38 @@
     <script type="text/javascript" src="scripts/line.js"></script>
     <script type="text/javascript" src="scripts/entities/spriteentity.js"></script>
     <script type="text/javascript" src="scripts/entities/skeleton.js"></script>
+    <script type="text/javascript" src="scripts/entities/kobold.js"></script>
     <script type="text/javascript" src="scripts/entities/tree.js"></script>
     <script type="text/javascript" src="scripts/entities/outerwall.js"></script>
     <script type="text/javascript" src="scripts/entities/wall.js"></script>
     <script type="text/javascript" src="scripts/entities/ground.js"></script>
     <script type="text/javascript" src="scripts/scenemanager.js"></script>
-    <script type="text/javascript" src="scripts/graphicinterface.js"></script>
+    <script type="text/javascript" src="scripts/headsupdisplay.js"></script>
 </head>
 <body>
-<div>
-    <canvas id="gameWorld" width="640" height="480" style="background: skyblue; border: 1px solid black" tabindex="0"
-            autofocus></canvas>
-    <p><input type="checkbox" id="debug" checked> Debug</p>
-</div>
-<div>
-    Controls:
-    <ul>
-        <li>W/Up - Move forward</li>
-        <li>S/Down - Move backward</li>
-        <li>A/Left - Turn left</li>
-        <li>D/Right - Turn right</li>
-    </ul>
+<div class="box">
+    <div id="banner">
+        <div class="content">
+            <h1>Old Parchment: Stadium</h1>
+        </div>
+    </div>
+    <div id="game">
+        <canvas id="gameWorld" width="640" height="480" style="background: skyblue; border: 1px solid black"
+                tabindex="0"
+                autofocus></canvas>
+        <div class="content" id="options">
+            <p><input type="checkbox" id="debug" checked>Debug</p>
+        </div>
+    </div>
+    <div class="content">
+        <h3>Controls:</h3>
+        <ul>
+            <li>W/Up - Move forward</li>
+            <li>S/Down - Move backward</li>
+            <li>A/Left - Turn left</li>
+            <li>D/Right - Turn right</li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

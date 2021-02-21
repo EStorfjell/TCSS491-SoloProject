@@ -11,10 +11,15 @@
 
 * Units in meters
 * Left-handed coordinates
-    * -y is north
-    * -x is west
-    * +y is south
-    * +x is west
-    * -z is down
-    * +z is up
+  * -y is north
+  * -x is west
+  * +y is south
+  * +x is west
+  * -z is down
+  * +z is up
 * Directions in radians clockwise from West
+
+## Credits
+
+* Skeleton and tree sprites by Mythril Age
+* Daedroth (Kobold) from The Elder Scrolls II: Daggerfall

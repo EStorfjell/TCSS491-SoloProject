@@ -7,8 +7,8 @@
  */
 
 class Tree extends SpriteEntity {
-    static width = 1; // diameter in meters
-    static height = 3; // height in meters
+    static width = 1.5; // diameter in meters
+    static height = 4; // height in meters
 
     // sprite sheet
     static spritesheet = ASSET_MANAGER.getAsset("sprites/tree.png");

@@ -47,11 +47,11 @@ class Animator {
             this.width * scale,
             this.height * scale);
 
-        // if (PARAMS.DEBUG) {
-        //     ctx.strokeStyle = 'red';
-        //     ctx.lineWidth = 1;
-        //     ctx.strokeRect(x, y, this.width * scale, this.height * scale);
-        // }
+        if (PARAMS.DEBUG) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x, y, this.width * scale, this.height * scale);
+        }
     };
 
     currentFrame() {

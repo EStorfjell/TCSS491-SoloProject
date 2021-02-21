@@ -45,8 +45,9 @@ function radToDeg(rad) {
 
 const PARAMS = {
     VERTICAL_FOV: degToRad(50),
-    HORIZONTAL_FOV: degToRad(63),
-    CAMERA_HEIGHT: 1.0,
+    HORIZONTAL_FOV: degToRad(79),
+    HUD_HEIGHT: 120,
+    CAMERA_HEIGHT: 1.6,
     DEBUG: true,
     PRECISION: 0.001
 };

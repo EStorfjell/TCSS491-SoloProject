@@ -7,8 +7,8 @@
  */
 
 class Player {
-    constructor(game, xPos, yPos, direction) {
-        Object.assign(this, {game, xPos, yPos, direction});
+    constructor(game, xPos, yPos, direction, health) {
+        Object.assign(this, {game, xPos, yPos, direction, health});
         this.game.player = this;
 
         this.width = 0.5; // diameter in meters

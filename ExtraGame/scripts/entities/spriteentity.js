@@ -19,7 +19,6 @@ class SpriteEntity {
     };
 
     renderCalc() {
-        // TODO: Implement rotation
         // Determine where the sprite is relative to the player
         let headingFromPlayer;
         let xDiff = this.xPos - this.game.player.xPos;
@@ -52,9 +51,12 @@ class SpriteEntity {
         // Determine size, orientation and location of sprite
         if (this._isVisible) {
             // TODO: Calculate which orientation the sprite should display
-            let headingToPlayer = headingFromPlayer - 2 * Math.PI;
-            if (headingToPlayer < 0) {
-                headingToPlayer += 2 * Math.PI;
+            this._screenRotation = (3 * Math.PI / 2) - headingFromPlayer + this.direction;
+            while (this._screenRotation >= 2 * Math.PI) {
+                this._screenRotation -= 2 * Math.PI;
+            }
+            while (this._screenRotation < 0) {
+                this._screenRotation += 2 * Math.PI;
             }
 
             let distanceFromPlayer = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
@@ -103,4 +105,8 @@ class SpriteEntity {
     get isVisible() {
         return this._isVisible;
     };
+
+    get screenRotation() {
+        return this._screenRotation;
+    }
 }
