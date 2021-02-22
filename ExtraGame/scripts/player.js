@@ -12,8 +12,8 @@ class Player {
         this.game.player = this;
 
         this.width = 0.5; // diameter in meters
-        this.walkSpeed = 3.5; // speed in m/s
-        this.turnSpeed = Math.PI / 3; // rads turned in 1 second
+        this.walkSpeed = 4; // speed in m/s
+        this.turnSpeed = Math.PI / 2; // rads turned in 1 second
     };
 
     update() {

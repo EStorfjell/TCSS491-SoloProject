@@ -20,6 +20,7 @@ class SpriteEntity {
 
     renderCalc() {
         // Determine where the sprite is relative to the player
+        let relationToPlayer = this.relationToTarget(this.game.player);
         let headingFromPlayer;
         let xDiff = this.xPos - this.game.player.xPos;
         let yDiff = this.yPos - this.game.player.yPos;
@@ -96,6 +97,26 @@ class SpriteEntity {
             let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
             this.screenX = viewCenterX - xOffset;
         }
+    };
+
+    relationToTarget(target) {
+        let relation = {distance: 0, direction: 0};
+        let xDiff = target.xPos - this.xPos;
+        let yDiff = target.yPos - this.yPos;
+        if (xDiff > 0) {
+            relation.direction = Math.atan(yDiff / xDiff);
+            if (relation.direction < 0) relation.direction += 2 * Math.PI;
+        } else if (xDiff < 0) {
+            relation.direction = Math.PI + Math.atan(yDiff / xDiff);
+        } else {
+            if (yDiff > 0) {
+                relation.direction = Math.PI / 2;
+            } else {
+                relation.direction = 3 * Math.PI / 2;
+            }
+        }
+        relation.distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+        return relation;
     };
 
     get renderDistance() {

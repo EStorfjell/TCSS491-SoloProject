@@ -27,7 +27,7 @@ class SceneManager {
         let ground = new Ground(this.game, "green");
         this.game.addEntity(ground);
 
-        let wall = new OuterWall(this.game, -20, -20, 40, 40, 5);
+        let wall = new OuterWall(this.game, -20, -20, 40, 40, 3);
         this.game.addEntity(wall);
 
         let tree = new Tree(this.game, -10, -10, 0);
@@ -39,7 +39,7 @@ class SceneManager {
         tree = new Tree(this.game, 10, 10, 0);
         this.game.addEntity(tree);
 
-        let enemy = new Kobold(this.game, 0, -10, degToRad(90));
+        let enemy = new Kobold(this.game, 0, -10, degToRad(225));
         this.game.addEntity(enemy);
 
         let hud = new HeadsUpDisplay(this.game, -(PARAMS.CANVAS_WIDTH / 2), PARAMS.HUD_TOP, PARAMS.CANVAS_WIDTH,

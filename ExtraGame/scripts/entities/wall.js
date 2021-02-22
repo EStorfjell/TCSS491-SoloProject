@@ -32,72 +32,22 @@ class Wall {
             this.corners[3] = endEdge.bottomScreenCorner;
             this.corners[2] = endEdge.topScreenCorner;
         } else {
-            // TODO: FIX
-            let wallLine = new Line(this.game, this.xStart, this.yStart, this.xEnd, this.yEnd);
-            let viewTargets = {
-                leftX: this.game.player.xPos + 10 * Math.cos(this.game.player.direction - (PARAMS.HORIZONTAL_FOV / 2)),
-                leftY: this.game.player.yPos + 10 * Math.sin(this.game.player.direction - (PARAMS.HORIZONTAL_FOV / 2)),
-                rightX: this.game.player.xPos + 10 * Math.cos(this.game.player.direction + (PARAMS.HORIZONTAL_FOV / 2)),
-                rightY: this.game.player.yPos + 10 * Math.sin(this.game.player.direction + (PARAMS.HORIZONTAL_FOV / 2))
-            };
-            let leftView = new Line(this.game, this.game.player.xPos, this.game.player.yPos, viewTargets.leftX,
-                viewTargets.leftY);
-            let rightView = new Line(this.game, this.game.player.xPos, this.game.player.yPos, viewTargets.rightX,
-                viewTargets.rightY);
 
-            let leftIntersect = wallLine.collide(leftView);
-            let rightIntersect = wallLine.collide(rightView);
-
-            let leftEdge = null;
-            let rightEdge = null;
-
-            if (leftIntersect !== false && this.checkEdgeVisible(leftIntersect.x, leftIntersect.y, Math.PI)) {
-                leftEdge = this.renderEdge(leftIntersect.x, leftIntersect.y);
-            }
-            if (rightIntersect !== false && this.checkEdgeVisible(rightIntersect.x, rightIntersect.y, Math.PI)) {
-                rightEdge = this.renderEdge(rightIntersect.x, rightIntersect.y);
-            }
-
-            if (startVisible) {
-                // "Start" edge can be drawn simply and line intersection required for rest
-                let startEdge = this.renderEdge(this.xStart, this.yStart);
-                this.corners[0] = startEdge.bottomScreenCorner;
-                this.corners[1] = startEdge.topScreenCorner;
-
-                if (leftEdge !== null) {
-                    this.corners[3] = leftEdge.bottomScreenCorner;
-                    this.corners[2] = leftEdge.topScreenCorner;
-                } else if (rightEdge !== null) {
-                    this.corners[3] = rightEdge.bottomScreenCorner;
-                    this.corners[2] = rightEdge.topScreenCorner;
-                }
-            } else if (endVisible) {
-                // "End" edge can be drawn simply and line intersection required for rest
-                let endEdge = this.renderEdge(this.xEnd, this.yEnd);
-                this.corners[3] = endEdge.bottomScreenCorner;
-                this.corners[2] = endEdge.topScreenCorner;
-
-                if (leftEdge !== null) {
-                    this.corners[0] = leftEdge.bottomScreenCorner;
-                    this.corners[1] = leftEdge.topScreenCorner;
-                } else if (rightEdge !== null) {
-                    this.corners[0] = rightEdge.bottomScreenCorner;
-                    this.corners[1] = rightEdge.topScreenCorner;
-                }
-            } else {
-                if (leftEdge !== null) {
-                    this.corners[0] = leftEdge.bottomScreenCorner;
-                    this.corners[1] = leftEdge.topScreenCorner;
-                } else {
-                    this._isVisible = false;
-                }
-                if (rightEdge !== null) {
-                    this.corners[3] = rightEdge.bottomScreenCorner;
-                    this.corners[2] = rightEdge.topScreenCorner;
-                } else {
-                    this._isVisible = false;
-                }
-            }
+            this._isVisible = false;
+            // // TODO: FIX
+            // let wallLine = new Line(this.game, this.xStart, this.yStart, this.xEnd, this.yEnd);
+            // let viewTargets = {
+            //     leftX: this.game.player.xPos + 10 * Math.cos(this.game.player.direction - (PARAMS.HORIZONTAL_FOV /
+            // 2)), leftY: this.game.player.yPos + 10 * Math.sin(this.game.player.direction - (PARAMS.HORIZONTAL_FOV /
+            // 2)), rightX: this.game.player.xPos + 10 * Math.cos(this.game.player.direction + (PARAMS.HORIZONTAL_FOV /
+            // 2)), rightY: this.game.player.yPos + 10 * Math.sin(this.game.player.direction + (PARAMS.HORIZONTAL_FOV /
+            // 2)) }; let leftView = new Line(this.game, this.game.player.xPos, this.game.player.yPos,
+            // viewTargets.leftX, viewTargets.leftY); let rightView = new Line(this.game, this.game.player.xPos,
+            // this.game.player.yPos, viewTargets.rightX, viewTargets.rightY);  let leftIntersect =
+            // wallLine.collide(leftView); let rightIntersect = wallLine.collide(rightView);  let leftEdge = null; let
+            // rightEdge = null;  if (leftIntersect !== false && this.checkEdgeVisible(leftIntersect.x,
+            // leftIntersect.y, Math.PI)) { leftEdge = this.renderEdge(leftIntersect.x, leftIntersect.y); } if
+            // (rightIntersect !== false && this.checkEdgeVisible(rightIntersect.x, rightIntersect.y, Math.PI)) { rightEdge = this.renderEdge(rightIntersect.x, rightIntersect.y); }  if (startVisible) { // "Start" edge can be drawn simply and line intersection required for rest let startEdge = this.renderEdge(this.xStart, this.yStart); this.corners[0] = startEdge.bottomScreenCorner; this.corners[1] = startEdge.topScreenCorner;  if (leftEdge !== null) { this.corners[3] = leftEdge.bottomScreenCorner; this.corners[2] = leftEdge.topScreenCorner; } else if (rightEdge !== null) { this.corners[3] = rightEdge.bottomScreenCorner; this.corners[2] = rightEdge.topScreenCorner; } } else if (endVisible) { // "End" edge can be drawn simply and line intersection required for rest let endEdge = this.renderEdge(this.xEnd, this.yEnd); this.corners[3] = endEdge.bottomScreenCorner; this.corners[2] = endEdge.topScreenCorner;  if (leftEdge !== null) { this.corners[0] = leftEdge.bottomScreenCorner; this.corners[1] = leftEdge.topScreenCorner; } else if (rightEdge !== null) { this.corners[0] = rightEdge.bottomScreenCorner; this.corners[1] = rightEdge.topScreenCorner; } } else { if (leftEdge !== null) { this.corners[0] = leftEdge.bottomScreenCorner; this.corners[1] = leftEdge.topScreenCorner; } else { this._isVisible = false; } if (rightEdge !== null) { this.corners[3] = rightEdge.bottomScreenCorner; this.corners[2] = rightEdge.topScreenCorner; } else { this._isVisible = false; } }
         }
     };
 

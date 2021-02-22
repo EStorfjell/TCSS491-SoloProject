@@ -9,8 +9,12 @@
 class Kobold extends SpriteEntity {
     static width = 0.5; // diameter in meters
     static height = 2; // height in meters
-    static walkSpeed = 2; // 2 m/s
-    static health = 10;
+    static walkSpeed = 1; // 2 m/s
+    static turnSpeed = Math.PI / 3; // rads turned in 1 second
+    static health = 20;
+
+    static aggroDistance = 15;
+    static attackReach = 2.5;
 
     // sprite sheet
     static spritesheet = ASSET_MANAGER.getAsset("sprites/kobold.png");
@@ -33,7 +37,61 @@ class Kobold extends SpriteEntity {
     };
 
     update() {
-        // TODO: Add Skeleton behavior and collision
+        // TODO: Add behavior and collision
+        let delX = 0;
+        let delY = 0;
+        let relationToPlayer = this.relationToTarget(this.game.player);
+        if (relationToPlayer.distance <= Kobold.aggroDistance) {
+            let rotateAmt = Kobold.turnSpeed * this.game.clockTick;
+            if (relationToPlayer.direction > this.direction && relationToPlayer.direction <= this.direction + Math.PI) {
+                this.direction = Math.min(relationToPlayer.direction, this.direction + rotateAmt);
+            } else if (relationToPlayer.direction < this.direction &&
+                relationToPlayer.direction > this.direction - Math.PI) {
+                this.direction = Math.max(relationToPlayer.direction, this.direction - rotateAmt);
+            } else if (relationToPlayer.direction + 2 * Math.PI > this.direction &&
+                relationToPlayer.direction + 2 * Math.PI <= this.direction + Math.PI) {
+                this.direction = Math.min(relationToPlayer.direction, this.direction + rotateAmt);
+            } else if (relationToPlayer.direction - 2 * Math.PI < this.direction &&
+                relationToPlayer.direction - 2 * Math.PI > this.direction - Math.PI) {
+                this.direction = Math.max(relationToPlayer.direction, this.direction - rotateAmt);
+            }
+
+            if (relationToPlayer.distance >= Kobold.attackReach) {
+                let walkLen = Kobold.walkSpeed * this.game.clockTick;
+                delX = walkLen * Math.cos(this.direction);
+                delY = walkLen * Math.sin(this.direction);
+            }
+        }
+
+        // TODO: Implement collision
+        let that = this;
+        this.game.entities.forEach(function (entity) {
+            if (entity instanceof OuterWall) {
+                let west = entity.xStart;
+                let east = entity.xStart + entity.xLength;
+                let north = entity.yStart;
+                let south = entity.yStart + entity.yLength;
+
+                if (that.xPos + delX <= west) {
+                    delX = 0;
+                    that.xPos = west;
+                } else if (that.xPos + delX >= east) {
+                    delX = 0;
+                    that.xPos = east;
+                }
+                if (that.yPos + delY <= north) {
+                    delY = 0;
+                    that.yPos = north;
+                } else if (that.yPos + delY >= south) {
+                    delY = 0;
+                    that.yPos = south;
+                }
+            }
+        });
+
+        this.xPos += delX;
+        this.yPos += delY;
+
         this.renderCalc();
     };
 

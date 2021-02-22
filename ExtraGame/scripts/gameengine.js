@@ -67,8 +67,8 @@ class GameEngine {
 
         this.ctx.canvas.addEventListener("mousemove", function (e) {
             that.mouse = getXandY(e);
-            that.mouse.x -= PARAMS.CANVAS_WIDTH / 2;
-            that.mouse.y -= PARAMS.GAME_CENTER;
+            that.mouse.x = Math.round(that.mouse.x - PARAMS.CANVAS_WIDTH / 2);
+            that.mouse.y = Math.round(that.mouse.y - PARAMS.GAME_CENTER);
         }, false);
 
         this.ctx.canvas.addEventListener("mousedown", function (e) {
@@ -86,14 +86,14 @@ class GameEngine {
 
         this.ctx.canvas.addEventListener("click", function (e) {
             that.leftClick = getXandY(e);
-            that.leftClick.x -= PARAMS.CANVAS_WIDTH / 2;
-            that.leftClick.y -= PARAMS.GAME_CENTER;
+            that.leftClick.x = Math.round(that.leftClick.x - PARAMS.CANVAS_WIDTH / 2);
+            that.leftClick.y = Math.round(that.leftClick.y - PARAMS.GAME_CENTER);
         }, false);
 
         this.ctx.canvas.addEventListener("contextmenu", function (e) {
             that.rightClick = getXandY(e);
-            that.rightClick.x -= PARAMS.CANVAS_WIDTH / 2;
-            that.rightClick.y -= PARAMS.GAME_CENTER;
+            that.rightClick.x = Math.round(that.rightClick.x - PARAMS.CANVAS_WIDTH / 2);
+            that.rightClick.y = Math.round(that.rightClick.y - PARAMS.GAME_CENTER);
             e.preventDefault();
         }, false);
 
@@ -168,12 +168,41 @@ class GameEngine {
     };
 
     draw() {
-        // TODO: Take "renderDistance" into account in render order
         this.ctx.clearRect(-(this.surfaceWidth / 2), PARAMS.CANVAS_TOP,
             this.surfaceWidth, this.surfaceHeight);
+
+        let background = [];
+        let sprites = new Map();
+        let foreground = [];
         for (let i = 0; i < this.entities.length; i++) {
-            this.entities[i].draw(this.ctx);
+            let entity = this.entities[i];
+            if (entity instanceof Ground) {
+                background.push(entity);
+            } else if (entity instanceof OuterWall) {
+                background.push(entity);
+            } else if (entity instanceof SpriteEntity) {
+                sprites.set(entity, entity.renderDistance);
+            } else if (entity instanceof HeadsUpDisplay) {
+                foreground.push(entity);
+            }
         }
+
+        for (let i = 0; i < background.length; i++) {
+            background[i].draw(this.ctx);
+        }
+
+        let spriteSort = new Map([...sprites.entries()].sort((a, b) => b[1] - a[1]));
+        for (let key of spriteSort.keys()) {
+            key.draw(this.ctx);
+        }
+
+        for (let i = 0; i < foreground.length; i++) {
+            foreground[i].draw(this.ctx);
+        }
+
+        // for (let i = 0; i < this.entities.length; i++) {
+        //     this.entities[i].draw(this.ctx);
+        // }
 
         this.world.draw(this.ctx);
     };
