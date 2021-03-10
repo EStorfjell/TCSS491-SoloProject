@@ -7,9 +7,11 @@
  */
 
 class Player {
-    constructor(game, xPos, yPos, direction, health) {
-        Object.assign(this, {game, xPos, yPos, direction, health});
+    constructor(game, xPos, yPos, direction, maxHealth) {
+        Object.assign(this, {game, xPos, yPos, direction, maxHealth});
         this.game.player = this;
+
+        this.health = this.maxHealth;
 
         this.width = 0.5; // diameter in meters
         this.walkSpeed = 4; // speed in m/s

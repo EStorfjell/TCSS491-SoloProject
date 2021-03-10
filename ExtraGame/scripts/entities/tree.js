@@ -12,8 +12,8 @@ class Tree extends SpriteEntity {
 
     // sprite sheet
     static spritesheet = ASSET_MANAGER.getAsset("sprites/tree.png");
-    static spriteWidth = 48;
-    static spriteHeight = 60;
+    static spriteWidth = 64;
+    static spriteHeight = 80;
 
     static animator = null;
 

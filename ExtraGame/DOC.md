@@ -23,3 +23,4 @@
 
 * Skeleton and tree sprites by Mythril Age
 * Daedroth (Kobold) from The Elder Scrolls II: Daggerfall
+* Player face sprites from Doom

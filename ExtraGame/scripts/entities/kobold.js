@@ -133,20 +133,28 @@ class Kobold extends SpriteEntity {
 
         // walking
         // east
-        Kobold.animations[0][0] = new Animator(Kobold.spritesheet, 10, 10, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][0] = new Animator(Kobold.spritesheet, 10, 10, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // southeast
-        Kobold.animations[0][1] = new Animator(Kobold.spritesheet, 10, 126, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][1] = new Animator(Kobold.spritesheet, 10, 126, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // south
-        Kobold.animations[0][2] = new Animator(Kobold.spritesheet, 10, 242, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][2] = new Animator(Kobold.spritesheet, 10, 242, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // southwest
-        Kobold.animations[0][3] = new Animator(Kobold.spritesheet, 10, 358, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][3] = new Animator(Kobold.spritesheet, 10, 358, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // west
-        Kobold.animations[0][4] = new Animator(Kobold.spritesheet, 10, 474, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][4] = new Animator(Kobold.spritesheet, 10, 474, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // northwest
-        Kobold.animations[0][5] = new Animator(Kobold.spritesheet, 10, 590, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][5] = new Animator(Kobold.spritesheet, 10, 590, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // north
-        Kobold.animations[0][6] = new Animator(Kobold.spritesheet, 10, 706, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][6] = new Animator(Kobold.spritesheet, 10, 706, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
         // northwest
-        Kobold.animations[0][7] = new Animator(Kobold.spritesheet, 10, 822, Kobold.spriteWidth, Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
+        Kobold.animations[0][7] = new Animator(Kobold.spritesheet, 10, 822, Kobold.spriteWidth,
+            Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
     };
 }

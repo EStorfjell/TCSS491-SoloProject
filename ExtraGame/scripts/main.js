@@ -13,6 +13,7 @@ const ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("sprites/skeleton.png");
 ASSET_MANAGER.queueDownload("sprites/kobold.png");
 ASSET_MANAGER.queueDownload("sprites/tree.png");
+ASSET_MANAGER.queueDownload("sprites/face.png");
 ASSET_MANAGER.queueDownload("sprites/keyboard.png");
 
 ASSET_MANAGER.downloadAll(function () {

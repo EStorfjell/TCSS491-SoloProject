@@ -12,7 +12,7 @@ class SceneManager {
         this.game.world = this;
         this.keyboardImg = ASSET_MANAGER.getAsset("sprites/keyboard.png");
 
-        this.player = new Player(this.game, 0, 0, 0, 0);
+        this.player = new Player(this.game, 0, 0, 0, 100);
 
         this.loadLevelOne();
     };
