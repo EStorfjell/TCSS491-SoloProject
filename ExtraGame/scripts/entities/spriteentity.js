@@ -7,9 +7,10 @@
  */
 
 class SpriteEntity {
-    constructor(game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight) {
-        Object.assign(this, {game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight});
+    constructor(game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight, maxHealth) {
+        Object.assign(this, {game, xPos, yPos, direction, width, height, spriteWidth, spriteHeight, maxHealth});
 
+        this.health = this.maxHealth;
         this._isVisible = false;
         this.screenX = 0;
         this.screenY = 0;
@@ -60,7 +61,7 @@ class SpriteEntity {
                 this._screenRotation += 2 * Math.PI;
             }
 
-            let distanceFromPlayer = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+            let distanceFromPlayer = relationToPlayer.distance;
 
             // Calculate distances for rendering
             // delta from player.direction
@@ -119,6 +120,48 @@ class SpriteEntity {
         return relation;
     };
 
+    takeDamage(amount) {
+        if (this.health > 0) {
+            this.health -= amount;
+            if (this.health <= 0) {
+                ASSET_MANAGER.playAsset("sfx/explode.mp3");
+                this.removeFromWorld = true;
+            } else {
+                ASSET_MANAGER.playAsset("sfx/hit1.mp3");
+            }
+        }
+    };
+
+    attack(target, range, damage) {
+        if (target instanceof SpriteEntity || target instanceof Player) {
+            let relToTar = this.relationToTarget(target);
+            if (relToTar.distance <= range) {
+                target.takeDamage(damage);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
+
+    drawHealth(ctx) {
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "alphabetic";
+        ctx.fillStyle = "white";
+        ctx.fillText("Health: " + this.health, this.screenX, this.screenY);
+    };
+
+    update() {
+
+    };
+
+    draw(ctx) {
+
+    };
+
     get renderDistance() {
         return this._renderDistance;
     };
@@ -129,5 +172,5 @@ class SpriteEntity {
 
     get screenRotation() {
         return this._screenRotation;
-    }
+    };
 }

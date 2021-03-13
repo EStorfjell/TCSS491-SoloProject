@@ -12,7 +12,6 @@ class SceneManager {
         this.game.world = this;
         this.keyboardImg = ASSET_MANAGER.getAsset("sprites/keyboard.png");
 
-        this.player = new Player(this.game, 0, 0, 0, 100);
 
         this.loadLevelOne();
     };
@@ -20,8 +19,7 @@ class SceneManager {
     loadLevelOne() {
         this.game.entities = [];
 
-        this.player.setPostition(0, 10, degToRad(270));
-        this.player.health = 100;
+        this.player = new Player(this.game, 0, 10, degToRad(270, 100), 100);
         this.game.addEntity(this.player);
 
         let ground = new Ground(this.game, "green");
@@ -73,10 +71,11 @@ class SceneManager {
             ctx.fillText("x: " + this.player.xPos.toFixed(3), left + 5, top + 5);
             ctx.fillText("y: " + this.player.yPos.toFixed(3), left + 5, top + 20);
             ctx.fillText("\u03B8: " + this.player.direction.toFixed(3), left + 5, top + 35);
-            ctx.fillText("MouseDown?: " + this.game.mouseDown, left + 5, top + 50);
-            ctx.fillText("MouseIn?: " + this.game.mouseInCanvas, left + 5, top + 65);
-            ctx.fillText("MouseX: " + this.game.mouse.x, left + 5, top + 80);
-            ctx.fillText("MouseY: " + this.game.mouse.y, left + 5, top + 95);
+            ctx.fillText("MouseIn?: " + this.game.mouseInCanvas, left + 5, top + 50);
+            ctx.fillText("MouseX: " + this.game.mouse.x, left + 5, top + 65);
+            ctx.fillText("MouseY: " + this.game.mouse.y, left + 5, top + 80);
+            ctx.fillText("LeftMouseDown?: " + this.game.leftMouseDown, left + 5, top + 95);
+            ctx.fillText("RightMouseDown?: " + this.game.rightMouseDown, left + 5, top + 110);
 
             if (this.game.left) {
                 ctx.drawImage(this.keyboardImg, 233, 40, 11, 11, left + 5, bottom - 16, 11, 11);

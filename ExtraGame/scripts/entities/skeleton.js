@@ -10,7 +10,7 @@ class Skeleton extends SpriteEntity {
     static width = 0.5; // diameter in meters
     static height = 2; // height in meters
     static walkSpeed = 2; // 2 m/s
-    static health = 10;
+    static maxHealth = 10;
 
     // sprite sheet
     static spritesheet = ASSET_MANAGER.getAsset("sprites/skeleton.png");
@@ -20,7 +20,8 @@ class Skeleton extends SpriteEntity {
     static animations = null;
 
     constructor(game, xPos, yPos, direction) {
-        super(game, xPos, yPos, direction, Skeleton.width, Skeleton.height, Skeleton.spriteWidth, Skeleton.spriteHeight);
+        super(game, xPos, yPos, direction, Skeleton.width, Skeleton.height, Skeleton.spriteWidth,
+            Skeleton.spriteHeight, Skeleton.maxHealth);
 
         // character states
         this.action = 0; // 0 = idle, 1 = walking

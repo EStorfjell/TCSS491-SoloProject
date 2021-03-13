@@ -62,8 +62,10 @@ class HeadsUpDisplay {
         ctx.fillRect(this.screenX + 2, this.screenY + 91, 180, 27);
         ctx.fillStyle = "black";
         ctx.fillRect(this.screenX + 3, this.screenY + 92, 178, 25);
-        ctx.fillStyle = "#d40c28";
-        ctx.fillRect(this.screenX + 3, this.screenY + 92, Math.ceil(this.healthRatio * 178), 25);
+        if (this.game.player.health >= 0) {
+            ctx.fillStyle = "#d40c28";
+            ctx.fillRect(this.screenX + 3, this.screenY + 92, Math.ceil(this.healthRatio * 178), 25);
+        }
     }
 
     drawToolArea(ctx) {

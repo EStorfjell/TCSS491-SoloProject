@@ -11,10 +11,13 @@ class Kobold extends SpriteEntity {
     static height = 2; // height in meters
     static walkSpeed = 1; // 2 m/s
     static turnSpeed = Math.PI / 3; // rads turned in 1 second
-    static health = 20;
+    static maxHealth = 20;
 
     static aggroDistance = 15;
-    static attackReach = 2.5;
+    static attackDistance = 2;
+    static attackReach = 3;
+    static attackDamage = 8;
+    static attackCooldown = 2;
 
     // sprite sheet
     static spritesheet = ASSET_MANAGER.getAsset("sprites/kobold.png");
@@ -25,11 +28,14 @@ class Kobold extends SpriteEntity {
     static animations = null;
 
     constructor(game, xPos, yPos, direction) {
-        super(game, xPos, yPos, direction, Kobold.width, Kobold.height, Kobold.spriteWidth, Kobold.spriteHeight);
-
+        super(game, xPos, yPos, direction, Kobold.width, Kobold.height, Kobold.spriteWidth, Kobold.spriteHeight,
+            Kobold.maxHealth);
         // character states
         this.action = 0; // 1 = walking, 2 = attacking
         this.facing = 0; // 0 = E, 1, = SE, 2 = S, 3 = SW, 4 = W, 5 = NW, 6 = N, 7 = NE
+
+        this.attackTimer = 0;
+        this.canAttack = true;
 
         if (Kobold.animations == null) {
             Kobold.loadAnimations();
@@ -56,10 +62,27 @@ class Kobold extends SpriteEntity {
                 this.direction = Math.max(relationToPlayer.direction, this.direction - rotateAmt);
             }
 
-            if (relationToPlayer.distance >= Kobold.attackReach) {
+            if (relationToPlayer.distance >= Kobold.attackDistance) {
                 let walkLen = Kobold.walkSpeed * this.game.clockTick;
                 delX = walkLen * Math.cos(this.direction);
                 delY = walkLen * Math.sin(this.direction);
+            }
+
+            if (relationToPlayer.distance <= Kobold.attackReach) {
+                this.attack(this.game.player);
+            }
+
+            if (this.canAttack) {
+                let hit = this.attack(this.game.player, Kobold.attackReach, Kobold.attackDamage);
+                if (hit) {
+                    this.canAttack = false;
+                    this.attack();
+                }
+            } else if (this.attackTimer < Kobold.attackCooldown) {
+                this.attackTimer += this.game.clockTick;
+            } else {
+                this.canAttack = true;
+                this.attackTimer = 0;
             }
         }
 
@@ -119,6 +142,10 @@ class Kobold extends SpriteEntity {
             let scale = this.screenHeight / Kobold.spriteHeight;
             Kobold.animations[this.action][this.facing].drawFrame(this.game.clockTick, ctx,
                 this.screenX, this.screenY, scale);
+
+            if (PARAMS.DEBUG) {
+                this.drawHealth(ctx);
+            }
         }
     };
 

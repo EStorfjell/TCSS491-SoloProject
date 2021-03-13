@@ -13,8 +13,11 @@ class GameEngine {
         this.entities = [];
         this.ctx = null;
 
+        this.gameRunning = true;
+
         this.mouseInCanvas = false;
-        this.mouseDown = false;
+        this.leftMouseDown = false;
+        this.rightMouseDown = false;
         this.mouse = {x: 0, y: 0};
         this.leftClick = {x: 0, y: 0};
         this.rightClick = {x: 0, y: 0};
@@ -24,6 +27,7 @@ class GameEngine {
         this.right = false;
         this.up = false;
         this.down = false;
+        this.useItem = false;
 
         this.surfaceWidth = null;
         this.surfaceHeight = null;
@@ -72,11 +76,27 @@ class GameEngine {
         }, false);
 
         this.ctx.canvas.addEventListener("mousedown", function (e) {
-            that.mouseDown = true;
+            switch (e.button) {
+                case 0:
+                    that.leftMouseDown = true;
+                    that.useItem = true;
+                    break;
+                case 2:
+                    that.rightMouseDown = true;
+                    break;
+            }
         }, false);
 
         this.ctx.canvas.addEventListener("mouseup", function (e) {
-            that.mouseDown = false;
+            switch (e.button) {
+                case 0:
+                    that.leftMouseDown = false;
+                    that.useItem = false;
+                    break;
+                case 2:
+                    that.rightMouseDown = false;
+                    break;
+            }
         }, false);
 
         this.ctx.canvas.addEventListener("wheel", function (e) {

@@ -18,7 +18,7 @@ class Tree extends SpriteEntity {
     static animator = null;
 
     constructor(game, xPos, yPos, direction) {
-        super(game, xPos, yPos, direction, Tree.width, Tree.height, Tree.spriteWidth, Tree.spriteHeight);
+        super(game, xPos, yPos, direction, Tree.width, Tree.height, Tree.spriteWidth, Tree.spriteHeight, -1);
 
         // character states
         this.action = 0; // 0 = idle, 1 = walking

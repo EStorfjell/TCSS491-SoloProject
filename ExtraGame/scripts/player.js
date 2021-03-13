@@ -16,6 +16,15 @@ class Player {
         this.width = 0.5; // diameter in meters
         this.walkSpeed = 4; // speed in m/s
         this.turnSpeed = Math.PI / 2; // rads turned in 1 second
+
+        this.selectedAction = 0; // 0 = attack
+
+        this.attackCooldown = 1; // second between attacks
+        this.attackTimer = 0;
+        this.canAttack = true;
+
+        this.attackDamage = 4;
+        this.attackReach = 3;
     };
 
     update() {
@@ -73,14 +82,48 @@ class Player {
 
         this.xPos += delX;
         this.yPos += delY;
+
+        if (this.canAttack) {
+            if (this.game.useItem && this.selectedAction == 0 && this.game.leftClick.y < PARAMS.HUD_TOP) {
+                this.game.useItem = false;
+                this.canAttack = false;
+                this.attack();
+            }
+        } else if (this.attackTimer < this.attackCooldown) {
+            this.attackTimer += this.game.clockTick;
+            this.game.useItem = false;
+        } else {
+            this.canAttack = true;
+            this.attackTimer = 0;
+        }
     };
 
     draw(ctx) {
 
     };
 
-    setPostition(xPos, yPos, direction) {
-        Object.assign(this, {xPos, yPos, direction});
+    attack() {
+        let that = this;
+        this.game.entities.forEach(function (entity) {
+            if (entity instanceof SpriteEntity) {
+                let relToPlayer = entity.relationToTarget(that);
+                if (relToPlayer.distance <= that.attackReach) {
+                    entity.takeDamage(that.attackDamage);
+                }
+            }
+        });
     };
 
+    takeDamage(amount) {
+        if (this.health > 0) {
+            this.health -= amount;
+            if (this.health <= 0) {
+                ASSET_MANAGER.playAsset("sfx/explode.mp3");
+                console.log("Player died");
+                this.game.world.loadLevelOne();
+            } else {
+                ASSET_MANAGER.playAsset("sfx/hit2.mp3");
+            }
+        }
+    };
 }
