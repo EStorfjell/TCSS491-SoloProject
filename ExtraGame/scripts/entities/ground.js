@@ -13,14 +13,14 @@ class Ground {
         this.y = 0;
         this.width = this.game.surfaceWidth;
         this.height = this.game.surfaceHeight;
-    };
+    }
 
     update() {
 
-    };
+    }
 
     draw(ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
-    };
+    }
 }

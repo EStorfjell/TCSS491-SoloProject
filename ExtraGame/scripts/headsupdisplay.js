@@ -45,6 +45,7 @@ class HeadsUpDisplay {
         ctx.fillRect(this.screenX, this.screenY, this.width, this.height);
 
         this.drawFace(ctx);
+        this.drawStats(ctx);
         this.drawHealth(ctx);
         this.drawToolArea(ctx);
         this.drawMinimap(ctx);
@@ -55,6 +56,16 @@ class HeadsUpDisplay {
         ctx.fillRect(this.screenX + 2, this.screenY + 2, 72, 87);
         HeadsUpDisplay.animations[this.playerState].drawFrame(this.game.clockTick, ctx, this.screenX + 2,
             this.screenY + 2, 3);
+    }
+
+    drawStats(ctx) {
+        ctx.font = "10px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillStyle = "white";
+        ctx.fillText("HP: " + this.game.player.health + " / " + this.game.player.maxHealth, this.screenX + 76,
+            this.screenY + 2);
+        ctx.fillText("ATK: " + this.game.player.attackDamage, this.screenX + 76, this.screenY + 14);
     }
 
     drawHealth(ctx) {

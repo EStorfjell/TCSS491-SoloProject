@@ -25,7 +25,7 @@ class Player {
 
         this.attackDamage = 4;
         this.attackReach = 3;
-    };
+    }
 
     update() {
         // turning
@@ -96,11 +96,11 @@ class Player {
             this.canAttack = true;
             this.attackTimer = 0;
         }
-    };
+    }
 
     draw(ctx) {
 
-    };
+    }
 
     attack() {
         let that = this;
@@ -112,7 +112,7 @@ class Player {
                 }
             }
         });
-    };
+    }
 
     takeDamage(amount) {
         if (this.health > 0) {
@@ -125,5 +125,5 @@ class Player {
                 ASSET_MANAGER.playAsset("sfx/hit2.mp3");
             }
         }
-    };
+    }
 }

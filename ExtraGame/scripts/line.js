@@ -17,7 +17,7 @@ class Line {
             x: x2,
             y: y2
         };
-    };
+    }
 
     slope() {
         let slope;
@@ -27,13 +27,13 @@ class Line {
             slope = false;
         }
         return slope;
-    };
+    }
 
     yIntercept() {
         if (this.point1.x === this.point2.x) return this.point1.x === 0 ? 0 : false;
         if (this.point1.y === this.point2.y) return this.point1.y;
         return this.point1.y - this.slope() * this.point1.x;
-    };
+    }
 
     collide(other) {
         if (this.slope() === other.slope()) return false;
@@ -41,5 +41,5 @@ class Line {
         intersect.x = (other.yIntercept() - this.yIntercept()) / (this.slope() - other.slope());
         intersect.y = this.slope() * intersect.x + this.yIntercept();
         return intersect;
-    };
+    }
 }

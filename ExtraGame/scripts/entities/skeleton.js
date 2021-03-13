@@ -30,12 +30,12 @@ class Skeleton extends SpriteEntity {
         if (Skeleton.animations == null) {
             Skeleton.loadAnimations();
         }
-    };
+    }
 
     update() {
         // TODO: Add Skeleton behavior and collision
         this.renderCalc();
-    };
+    }
 
     draw(ctx) {
         if (this.isVisible) {
@@ -53,7 +53,7 @@ class Skeleton extends SpriteEntity {
             let scale = this.screenHeight / Skeleton.spriteHeight;
             Skeleton.animations[this.action][this.facing].drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
         }
-    };
+    }
 
     static loadAnimations() {
         Skeleton.animations = [];
@@ -91,5 +91,5 @@ class Skeleton extends SpriteEntity {
         // north
         Skeleton.animations[1][3] = new Animator(Skeleton.spritesheet, 11, 210, Skeleton.spriteWidth,
             Skeleton.spriteHeight, 4, 0.15, 23, false, true);
-    };
+    }
 }

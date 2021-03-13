@@ -12,16 +12,16 @@ class AssetManager {
         this.errorCount = 0;
         this.cache = [];
         this.downloadQueue = [];
-    };
+    }
 
     queueDownload(path) {
         console.log("Queueing " + path);
         this.downloadQueue.push(path);
-    };
+    }
 
     isDone() {
         return this.downloadQueue.length === this.successCount + this.errorCount;
-    };
+    }
 
     downloadAll(callback) {
         if (this.downloadQueue.length === 0) setTimeout(callback, 20);
@@ -79,17 +79,17 @@ class AssetManager {
                     break;
             }
         }
-    };
+    }
 
     getAsset(path) {
         return this.cache[path];
-    };
+    }
 
     playAsset(path) {
         let audio = this.cache[path];
         audio.currentTime = 0;
         audio.play();
-    };
+    }
 
     muteAudio(mute) {
         for (let key in this.cache) {
@@ -98,7 +98,7 @@ class AssetManager {
                 asset.muted = mute;
             }
         }
-    };
+    }
 
     adjustVolume(volume) {
         for (let key in this.cache) {
@@ -107,7 +107,7 @@ class AssetManager {
                 asset.volume = volume;
             }
         }
-    };
+    }
 
     pauseBackgroundMusic() {
         for (let key in this.cache) {
@@ -117,12 +117,12 @@ class AssetManager {
                 asset.currentTime = 0;
             }
         }
-    };
+    }
 
     autoRepeat(path) {
         let aud = this.cache[path];
         aud.addEventListener("ended", function () {
             aud.play();
         });
-    };
+    }
 }

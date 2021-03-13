@@ -15,19 +15,19 @@ class OuterWall {
 
         this.walls = [];
         this.buildWalls();
-    };
+    }
 
     update() {
         for (let i = 0; i < this.walls.length; i++) {
             this.walls[i].update();
         }
-    };
+    }
 
     draw(ctx) {
         for (let i = 0; i < this.walls.length; i++) {
             this.walls[i].draw(ctx);
         }
-    };
+    }
 
     buildWalls() {
         for (let i = 0; i < 4; i++) { // four walls
@@ -46,5 +46,5 @@ class OuterWall {
         // west wall
         this.walls[3] = new Wall(this.game, this.xStart, this.yStart + this.yLength, this.xStart, this.yStart,
             this.height, OuterWall.color2);
-    };
+    }
 }

@@ -24,7 +24,7 @@ class Animator {
         this.elapsedTime = 0;
         this.totalTime = this.frameCount * this.frameDuration;
 
-    };
+    }
 
     drawFrame(tick, ctx, x, y, scale) {
         this.elapsedTime += tick;
@@ -52,13 +52,13 @@ class Animator {
             ctx.lineWidth = 1;
             ctx.strokeRect(x, y, this.width * scale, this.height * scale);
         }
-    };
+    }
 
     currentFrame() {
         return Math.floor(this.elapsedTime / this.frameDuration);
-    };
+    }
 
     isDone() {
         return (this.elapsedTime >= this.totalTime);
-    };
+    }
 }

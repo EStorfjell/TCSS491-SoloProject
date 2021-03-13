@@ -27,17 +27,17 @@ class Tree extends SpriteEntity {
         if (Tree.animator == null) {
             Tree.animator = new Animator(Tree.spritesheet, 0, 0, Tree.spriteWidth, Tree.spriteHeight, 1, 1, 0, false, true);
         }
-    };
+    }
 
     update() {
         // TODO: Add collision
         this.renderCalc();
-    };
+    }
 
     draw(ctx) {
         if (this.isVisible) {
             let scale = this.screenHeight / Tree.spriteHeight;
             Tree.animator.drawFrame(this.game.clockTick, ctx, this.screenX, this.screenY, scale);
         }
-    };
+    }
 }

@@ -17,7 +17,7 @@ class SpriteEntity {
         this.screenHeight = this.spriteHeight;
 
         this._renderDistance = 0;
-    };
+    }
 
     renderCalc() {
         // Determine where the sprite is relative to the player
@@ -98,7 +98,7 @@ class SpriteEntity {
             let xOffset = (this.screenHeight * this.spriteWidth / this.spriteHeight) / 2;
             this.screenX = viewCenterX - xOffset;
         }
-    };
+    }
 
     relationToTarget(target) {
         let relation = {distance: 0, direction: 0};
@@ -118,7 +118,7 @@ class SpriteEntity {
         }
         relation.distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
         return relation;
-    };
+    }
 
     takeDamage(amount) {
         if (this.health > 0) {
@@ -130,7 +130,7 @@ class SpriteEntity {
                 ASSET_MANAGER.playAsset("sfx/hit1.mp3");
             }
         }
-    };
+    }
 
     attack(target, range, damage) {
         if (target instanceof SpriteEntity || target instanceof Player) {
@@ -144,7 +144,7 @@ class SpriteEntity {
         } else {
             return false;
         }
-    };
+    }
 
     drawHealth(ctx) {
         ctx.font = "12px sans-serif";
@@ -152,25 +152,25 @@ class SpriteEntity {
         ctx.textBaseline = "alphabetic";
         ctx.fillStyle = "white";
         ctx.fillText("Health: " + this.health, this.screenX, this.screenY);
-    };
+    }
 
     update() {
 
-    };
+    }
 
     draw(ctx) {
 
-    };
+    }
 
     get renderDistance() {
         return this._renderDistance;
-    };
+    }
 
     get isVisible() {
         return this._isVisible;
-    };
+    }
 
     get screenRotation() {
         return this._screenRotation;
-    };
+    }
 }

@@ -40,7 +40,7 @@ class Kobold extends SpriteEntity {
         if (Kobold.animations == null) {
             Kobold.loadAnimations();
         }
-    };
+    }
 
     update() {
         // TODO: Add behavior and collision
@@ -116,7 +116,7 @@ class Kobold extends SpriteEntity {
         this.yPos += delY;
 
         this.renderCalc();
-    };
+    }
 
     draw(ctx) {
         if (this.isVisible) {
@@ -147,7 +147,7 @@ class Kobold extends SpriteEntity {
                 this.drawHealth(ctx);
             }
         }
-    };
+    }
 
     static loadAnimations() {
         Kobold.animations = [];
@@ -183,5 +183,5 @@ class Kobold extends SpriteEntity {
         // northwest
         Kobold.animations[0][7] = new Animator(Kobold.spritesheet, 10, 822, Kobold.spriteWidth,
             Kobold.spriteHeight, 4, Kobold.walkAnimSpeed, 10, false, true);
-    };
+    }
 }

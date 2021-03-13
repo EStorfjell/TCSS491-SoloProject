@@ -14,7 +14,7 @@ class SceneManager {
 
 
         this.loadLevelOne();
-    };
+    }
 
     loadLevelOne() {
         this.game.entities = [];
@@ -43,7 +43,7 @@ class SceneManager {
         let hud = new HeadsUpDisplay(this.game, -(PARAMS.CANVAS_WIDTH / 2), PARAMS.HUD_TOP, PARAMS.CANVAS_WIDTH,
             PARAMS.HUD_HEIGHT);
         this.game.addEntity(hud);
-    };
+    }
 
     updateAudio() {
         let mute = document.getElementById("mute").checked;
@@ -51,12 +51,12 @@ class SceneManager {
 
         ASSET_MANAGER.muteAudio(mute);
         ASSET_MANAGER.adjustVolume(volume);
-    };
+    }
 
     update() {
         PARAMS.DEBUG = document.getElementById("debug").checked;
         this.updateAudio();
-    };
+    }
 
     draw(ctx) {
         if (PARAMS.DEBUG) {
@@ -98,5 +98,5 @@ class SceneManager {
                 ctx.drawImage(this.keyboardImg, 269, 28, 11, 11, left + 17, bottom - 28, 11, 11);
             }
         }
-    };
+    }
 }

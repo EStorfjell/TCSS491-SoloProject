@@ -31,7 +31,7 @@ class GameEngine {
 
         this.surfaceWidth = null;
         this.surfaceHeight = null;
-    };
+    }
 
     init(ctx) {
         this.ctx = ctx;
@@ -42,7 +42,7 @@ class GameEngine {
 
         this.startInput();
         this.timer = new Timer();
-    };
+    }
 
     start() {
         let that = this;
@@ -50,7 +50,7 @@ class GameEngine {
             that.loop();
             requestAnimFrame(gameLoop, that.ctx.canvas);
         })();
-    };
+    }
 
     startInput() {
         let that = this;
@@ -170,13 +170,13 @@ class GameEngine {
                     break;
             }
         }, false);
-    };
+    }
 
     loop() {
         this.clockTick = this.timer.tick();
         this.update();
         this.draw();
-    };
+    }
 
     update() {
         let i;
@@ -197,7 +197,7 @@ class GameEngine {
                 this.entities.splice(i, 1);
             }
         }
-    };
+    }
 
     draw() {
         this.ctx.clearRect(-(this.surfaceWidth / 2), PARAMS.CANVAS_TOP,
@@ -237,9 +237,9 @@ class GameEngine {
         // }
 
         this.world.draw(this.ctx);
-    };
+    }
 
     addEntity(entity) {
         this.entities.push(entity);
-    };
+    }
 }

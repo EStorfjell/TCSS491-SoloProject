@@ -14,7 +14,7 @@ class Wall {
         this.initCorners();
 
         this._isVisible = false;
-    };
+    }
 
     update() {
         // Determine if the player can see edges of walls
@@ -49,7 +49,7 @@ class Wall {
             // leftIntersect.y, Math.PI)) { leftEdge = this.renderEdge(leftIntersect.x, leftIntersect.y); } if
             // (rightIntersect !== false && this.checkEdgeVisible(rightIntersect.x, rightIntersect.y, Math.PI)) { rightEdge = this.renderEdge(rightIntersect.x, rightIntersect.y); }  if (startVisible) { // "Start" edge can be drawn simply and line intersection required for rest let startEdge = this.renderEdge(this.xStart, this.yStart); this.corners[0] = startEdge.bottomScreenCorner; this.corners[1] = startEdge.topScreenCorner;  if (leftEdge !== null) { this.corners[3] = leftEdge.bottomScreenCorner; this.corners[2] = leftEdge.topScreenCorner; } else if (rightEdge !== null) { this.corners[3] = rightEdge.bottomScreenCorner; this.corners[2] = rightEdge.topScreenCorner; } } else if (endVisible) { // "End" edge can be drawn simply and line intersection required for rest let endEdge = this.renderEdge(this.xEnd, this.yEnd); this.corners[3] = endEdge.bottomScreenCorner; this.corners[2] = endEdge.topScreenCorner;  if (leftEdge !== null) { this.corners[0] = leftEdge.bottomScreenCorner; this.corners[1] = leftEdge.topScreenCorner; } else if (rightEdge !== null) { this.corners[0] = rightEdge.bottomScreenCorner; this.corners[1] = rightEdge.topScreenCorner; } } else { if (leftEdge !== null) { this.corners[0] = leftEdge.bottomScreenCorner; this.corners[1] = leftEdge.topScreenCorner; } else { this._isVisible = false; } if (rightEdge !== null) { this.corners[3] = rightEdge.bottomScreenCorner; this.corners[2] = rightEdge.topScreenCorner; } else { this._isVisible = false; } }
         }
-    };
+    }
 
     draw(ctx) {
         if (this._isVisible) {
@@ -63,13 +63,13 @@ class Wall {
             ctx.closePath();
             ctx.fill();
         }
-    };
+    }
 
     initCorners() {
         for (let i = 0; i < 4; i++) { // four corners
             this.corners.push({screenX: 0, screenY: 0});
         }
-    };
+    }
 
     get isVisible() {
         return this._isVisible;
@@ -93,7 +93,7 @@ class Wall {
         }
 
         return visible;
-    };
+    }
 
     calcHeadingFromPlayer(xPos, yPos) {
         let headingFromPlayer;
@@ -112,7 +112,7 @@ class Wall {
             }
         }
         return headingFromPlayer;
-    };
+    }
 
     renderEdge(xPos, yPos) {
         let headingFromPlayer = this.calcHeadingFromPlayer(xPos, yPos);
@@ -148,5 +148,5 @@ class Wall {
         let topScreenCorner = {screenX: screenX, screenY: screenYTop};
 
         return {bottomScreenCorner, topScreenCorner};
-    };
+    }
 }

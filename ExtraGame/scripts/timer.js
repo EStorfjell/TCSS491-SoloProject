@@ -1,4 +1,12 @@
 /*
+ * Author: Espen Storfjell
+ * Course: TCSS 491 A Wi 21 - Computational Worlds
+ * School: University of Washington Tacoma
+ *
+ * Copyright (c) 2021.
+ */
+
+/*
 * Author: Espen Storfjell
 * Course: TCSS 491 A Wi 21 - Computational Worlds
 * School: University of Washington Tacoma
@@ -11,7 +19,7 @@ class Timer {
         this.gameTime = 0;
         this.maxStep = 0.05;
         this.lastTimestamp = 0;
-    };
+    }
 
     tick() {
         let current = Date.now();
@@ -21,5 +29,5 @@ class Timer {
         let gameDelta = Math.min(delta, this.maxStep);
         this.gameTime += gameDelta;
         return gameDelta;
-    };
+    }
 }
