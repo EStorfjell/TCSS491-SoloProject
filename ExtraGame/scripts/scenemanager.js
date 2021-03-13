@@ -47,8 +47,17 @@ class SceneManager {
         this.game.addEntity(hud);
     };
 
+    updateAudio() {
+        let mute = document.getElementById("mute").checked;
+        let volume = document.getElementById("volume").value;
+
+        ASSET_MANAGER.muteAudio(mute);
+        ASSET_MANAGER.adjustVolume(volume);
+    };
+
     update() {
         PARAMS.DEBUG = document.getElementById("debug").checked;
+        this.updateAudio();
     };
 
     draw(ctx) {

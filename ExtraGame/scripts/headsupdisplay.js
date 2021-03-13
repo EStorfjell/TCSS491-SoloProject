@@ -8,7 +8,7 @@
 
 class HeadsUpDisplay {
     // sprite sheet
-    static spritesheet = ASSET_MANAGER.getAsset("sprites/face.png");
+    static facesheet = ASSET_MANAGER.getAsset("sprites/face.png");
     static spriteWidth = 24;
     static spriteHeight = 29;
 
@@ -20,6 +20,7 @@ class HeadsUpDisplay {
         Object.assign(this, {game, screenX, screenY, width, height});
 
         this.playerState = 0;
+        this.healthRatio = 1;
 
         if (HeadsUpDisplay.animations == null) {
             HeadsUpDisplay.loadAnimations();
@@ -27,7 +28,16 @@ class HeadsUpDisplay {
     }
 
     update() {
-
+        this.healthRatio = this.game.player.health / this.game.player.maxHealth;
+        if (this.healthRatio > 0.75) {
+            this.playerState = 0;
+        } else if (this.healthRatio > 0.5) {
+            this.playerState = 1;
+        } else if (this.healthRatio > 0.25) {
+            this.playerState = 2;
+        } else {
+            this.playerState = 3;
+        }
     }
 
     draw(ctx) {
@@ -43,7 +53,8 @@ class HeadsUpDisplay {
     drawFace(ctx) {
         ctx.fillStyle = "#223030";
         ctx.fillRect(this.screenX + 2, this.screenY + 2, 72, 87);
-        HeadsUpDisplay.animations[0].drawFrame(this.game.clockTick, ctx, this.screenX + 2, this.screenY + 2, 3);
+        HeadsUpDisplay.animations[this.playerState].drawFrame(this.game.clockTick, ctx, this.screenX + 2,
+            this.screenY + 2, 3);
     }
 
     drawHealth(ctx) {
@@ -52,8 +63,7 @@ class HeadsUpDisplay {
         ctx.fillStyle = "black";
         ctx.fillRect(this.screenX + 3, this.screenY + 92, 178, 25);
         ctx.fillStyle = "#d40c28";
-        let healthFill = Math.ceil((this.game.player.health / this.game.player.maxHealth) * 178);
-        ctx.fillRect(this.screenX + 3, this.screenY + 92, healthFill, 25);
+        ctx.fillRect(this.screenX + 3, this.screenY + 92, Math.ceil(this.healthRatio * 178), 25);
     }
 
     drawToolArea(ctx) {
@@ -75,8 +85,20 @@ class HeadsUpDisplay {
         }
 
         // undamaged
-        HeadsUpDisplay.animations[0] = new Animator(HeadsUpDisplay.spritesheet, 2, 2,
-            HeadsUpDisplay.spriteWidth, HeadsUpDisplay.spriteHeight, 3, HeadsUpDisplay.faceAnimSpeed,
+        HeadsUpDisplay.animations[0] = new Animator(HeadsUpDisplay.facesheet, 2, 2,
+            HeadsUpDisplay.spriteWidth, HeadsUpDisplay.spriteHeight, 4, HeadsUpDisplay.faceAnimSpeed,
+            2, false, true);
+        // light damage
+        HeadsUpDisplay.animations[1] = new Animator(HeadsUpDisplay.facesheet, 2, 33,
+            HeadsUpDisplay.spriteWidth, HeadsUpDisplay.spriteHeight, 4, HeadsUpDisplay.faceAnimSpeed,
+            2, false, true);
+        // medium damage
+        HeadsUpDisplay.animations[2] = new Animator(HeadsUpDisplay.facesheet, 2, 64,
+            HeadsUpDisplay.spriteWidth, HeadsUpDisplay.spriteHeight, 4, HeadsUpDisplay.faceAnimSpeed,
+            2, false, true);
+        // heavy damage
+        HeadsUpDisplay.animations[3] = new Animator(HeadsUpDisplay.facesheet, 2, 96,
+            HeadsUpDisplay.spriteWidth, HeadsUpDisplay.spriteHeight, 4, HeadsUpDisplay.faceAnimSpeed,
             2, false, true);
     };
 }

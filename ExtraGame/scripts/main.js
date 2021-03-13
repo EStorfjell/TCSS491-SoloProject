@@ -16,6 +16,11 @@ ASSET_MANAGER.queueDownload("sprites/tree.png");
 ASSET_MANAGER.queueDownload("sprites/face.png");
 ASSET_MANAGER.queueDownload("sprites/keyboard.png");
 
+ASSET_MANAGER.queueDownload("sfx/explode.mp3");
+ASSET_MANAGER.queueDownload("sfx/footstep.mp3");
+ASSET_MANAGER.queueDownload("sfx/hit1.mp3");
+ASSET_MANAGER.queueDownload("sfx/hit2.mp3");
+
 ASSET_MANAGER.downloadAll(function () {
     let canvas = document.getElementById("gameWorld");
     let ctx = canvas.getContext("2d");
