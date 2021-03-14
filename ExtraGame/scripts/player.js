@@ -118,7 +118,7 @@ class Player {
         if (this.health > 0) {
             this.health -= amount;
             if (this.health <= 0) {
-                ASSET_MANAGER.playAsset("sfx/explode.mp3");
+                ASSET_MANAGER.playAsset("sfx/lose.mp3");
                 console.log("Player died");
                 this.game.world.loadLevelOne();
             } else {
