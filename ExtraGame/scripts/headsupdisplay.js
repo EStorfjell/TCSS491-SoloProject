@@ -113,5 +113,5 @@ class HeadsUpDisplay {
         HeadsUpDisplay.animations[3] = new Animator(HeadsUpDisplay.facesheet, 2, 96,
             HeadsUpDisplay.spriteWidth, HeadsUpDisplay.spriteHeight, 4, HeadsUpDisplay.faceAnimSpeed,
             2, false, true);
-    };
+    }
 }
